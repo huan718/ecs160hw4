@@ -1,0 +1,7 @@
+Launcher.class
+com/ecs160/EndpointDefinition.class
+MicroserviceRegistry.class
+com/ecs160/annotations/Endpoint.class
+com/ecs160/ExampleService.class
+Launcher$DispatchHandler.class
+com/ecs160/annotations/Microservice.class

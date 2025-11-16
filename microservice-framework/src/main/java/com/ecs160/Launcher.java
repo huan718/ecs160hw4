@@ -8,11 +8,15 @@ import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.Executors;
 
+import com.ecs160.annotations.Microservice;
+import com.ecs160.annotations.Endpoint;
+import com.ecs160.EndpointDefinition;
+
 public class Launcher {
 
     private final MicroserviceRegistry registry;
 
-    public MicroserviceLauncher(MicroserviceRegistry registry) {
+    public Launcher(MicroserviceRegistry registry) {
         this.registry = registry;
     }
 

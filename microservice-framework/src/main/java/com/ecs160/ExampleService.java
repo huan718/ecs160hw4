@@ -1,5 +1,7 @@
-import com.example.microframework.annotations.Microservice;
-import com.example.microframework.annotations.Endpoint;
+package com.ecs160;
+
+import com.ecs160.annotations.Microservice;
+import com.ecs160.annotations.Endpoint;
 
 @Microservice
 public class ExampleService {

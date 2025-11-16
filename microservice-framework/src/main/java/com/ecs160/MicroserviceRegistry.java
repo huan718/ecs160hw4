@@ -1,8 +1,10 @@
-import com.example.microframework.annotations.Endpoint;
-import com.example.microframework.annotations.Microservice;
 import java.lang.reflect.Method;
 import java.util.*;
 import org.reflections.Reflections;
+
+import com.ecs160.annotations.Microservice;
+import com.ecs160.annotations.Endpoint;
+import com.ecs160.EndpointDefinition;
 
 public class MicroserviceRegistry {
     private final Map<String, EndpointDefinition> routes = new HashMap<>();
