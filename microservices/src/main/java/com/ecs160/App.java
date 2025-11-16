@@ -9,9 +9,9 @@ public class App
     {
         //System.out.println( "Hello World!" );
         MicroserviceRegistry registry = new MicroserviceRegistry();
-        MicroserviceLauncher launcher = new Launcher(registry);
+        Launcher launcher = new Launcher();
 
-        launcher.launch(8080, "com.ecs160.microservices");         
+        launcher.launch(8080);         
 
         System.out.println("Server running at http://localhost:8080");
     }
