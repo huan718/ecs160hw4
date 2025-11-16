@@ -1,70 +1,44 @@
-import java.lang.reflect.Method;
-import java.util.*;
-import org.reflections.Reflections;
+package com.ecs160;
 
-import com.ecs160.annotations.Microservice;
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.ecs160.annotations.Endpoint;
-import com.ecs160.EndpointDefinition;
+import com.ecs160.annotations.Microservice;
 
 public class MicroserviceRegistry {
-    private final Map<String, EndpointDefinition> routes = new HashMap<>();
 
-    public void scanAndRegister(String... packages) {
-        if (packages == null || packages.length == 0) {
-            throw new IllegalArgumentException("At least one package to scan must be provided.");
-        }
+   private final Map<String, Endpointdef> endpoints = new HashMap<>();
 
-        for (String pkg : packages) {
-            Reflections reflections = new Reflections(pkg);
-            Set<Class<?>> svcClasses = reflections.getTypesAnnotatedWith(Microservice.class);
-            for (Class<?> clazz : svcClasses) {
-                try {
-                    Object instance = clazz.getDeclaredConstructor().newInstance();
-                    for (Method m : clazz.getDeclaredMethods()) {
-                        Endpoint ep = m.getAnnotation(Endpoint.class);
-                        if (ep != null) {
-                            validateMethodSignature(m, clazz);
-                            String url = normalizeUrl(ep.url());
-                            if (routes.containsKey(url)) {
-                                throw new IllegalStateException("Duplicate endpoint url: " + url);
-                            }
-                            m.setAccessible(true);
-                            routes.put(url, new EndpointDefinition(instance, m, url));
-                        }
-                    }
-                } catch (ReflectiveOperationException ex) {
-                    throw new RuntimeException("Failed to instantiate microservice: " + clazz.getName(), ex);
-                }
-            }
-        }
-    }
+   public void register(Object service) {
+      Class<?> clazz = service.getClass();
 
-    private String normalizeUrl(String url) {
-        if (url == null || url.isBlank()) {
-            throw new IllegalArgumentException("Endpoint url cannot be null/blank.");
-        }
-        if (!url.startsWith("/")) {
-            return "/" + url;
-        }
-        return url;
-    }
+      // Only register if annotated with @Microservice
+      if (!clazz.isAnnotationPresent(Microservice.class)) {
+         throw new IllegalArgumentException(clazz.getName() + " is not annotated with @Microservice");
+      }
 
-    private void validateMethodSignature(Method m, Class<?> clazz) {
-        // must return String
-        if (!String.class.equals(m.getReturnType())) {
-            throw new IllegalArgumentException("Method " + m.getName() + " in " + clazz.getName() + " must return String.");
-        }
-        Class<?>[] params = m.getParameterTypes();
-        if (params.length != 1 || !String.class.equals(params[0])) {
-            throw new IllegalArgumentException("Method " + m.getName() + " in " + clazz.getName() + " must accept a single String parameter.");
-        }
-    }
+      // Look for methods annotated with @Endpoint
+      for (Method method : clazz.getDeclaredMethods()) {
+         if (method.isAnnotationPresent(Endpoint.class)) {
+               String url = method.getAnnotation(Endpoint.class).url();
+               validateEndpointMethod(method);
+               endpoints.put(url, new Endpointdef(service, method, url));
+         }
+      }
+   }
 
-    public Optional<EndpointDefinition> find(String path) {
-        return Optional.ofNullable(routes.get(path));
-    }
+   public Endpointdef get(String url) {
+      return endpoints.get(url);
+   }
 
-    public Set<String> getRegisteredUrls() {
-        return Collections.unmodifiableSet(routes.keySet());
-    }
+   private void validateEndpointMethod(Method method) {
+      // Method must be: String handleRequest(String input)
+      if (!method.getReturnType().equals(String.class)
+               || method.getParameterCount() != 1
+               || !method.getParameterTypes()[0].equals(String.class)) {
+         throw new IllegalArgumentException("Invalid endpoint signature: must be String handleRequest(String input)");
+      }
+   }
 }
