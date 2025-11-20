@@ -13,6 +13,10 @@ public class IssueSummarizerMicroservice {
         try {
             String prompt = "Summarize this GitHub issue and output the JSON in issue format:\n" + issueJson;
             String ollamaResponse = OllamaClient.askDeepCoder(prompt);
+            
+            if (ollamaResponse == null) {
+                return "{\"error\":\"Ollama returned null\"}";
+            }
 
             return ollamaResponse;
 

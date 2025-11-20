@@ -3,6 +3,10 @@ package com.ecs160;
 import com.ecs160.MicroserviceRegistry;
 import com.ecs160.Launcher;
 
+import com.ecs160.microservices.*;
+
+import java.util.List;
+
 public class App 
 {
     public static void main( String[] args )
