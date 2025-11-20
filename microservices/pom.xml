@@ -42,7 +42,7 @@
       <artifactId>gson</artifactId>
       <version>2.11.0</version>
     </dependency>
-    <!-- Ollama -->
+    <!-- OkHttp -->
     <dependency>
       <groupId>com.squareup.okhttp3</groupId>
       <artifactId>okhttp</artifactId>

@@ -11,7 +11,30 @@ public class OllamaClient {
    private static final Gson gson = new Gson();  
 
    public static String askDeepCoder(String prompt) throws IOException {
-      // Finish implementation later
-      return "";
+      JsonObject payload = new JsonObject();
+      payload.addProperty("model", "deepcoder:1.5b");
+      payload.addProperty("prompt", prompt);
+
+      RequestBody body = RequestBody.create(
+            payload.toString(),                  
+            MediaType.get("application/json; charset=utf-8")
+            );
+
+      Request request = new Request.Builder()
+            .url(OLLAMA_URL)
+            .post(body)
+            .build();
+      
+      try (Response response = client.newCall(request).execute()) {
+         if (response.isSuccessful() && response.body() != null) {
+            return response.body().string(); 
+         } else {
+            System.err.println("Request failed: " + response.code());
+         }
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+
+      return null;
    }
 }

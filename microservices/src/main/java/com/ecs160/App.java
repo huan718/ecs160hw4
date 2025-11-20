@@ -11,6 +11,12 @@ public class App
         MicroserviceRegistry registry = new MicroserviceRegistry();
         Launcher launcher = new Launcher();
 
+        launcher.registerAll(List.of(
+            new IssueSummarizerMicroservice(),
+            new BugFinderMicroservice(),
+            new IssueComparatorMicroservice()
+        ));
+
         launcher.launch(8080);         
 
         System.out.println("Server running at http://localhost:8080");
