@@ -2,8 +2,8 @@ package com.ecs160.microservices;
 
 // import the Microservice annotation we created
 import com.ecs160.annotations.Microservice;
+import com.ecs160.OllamaClient;
 import com.ecs160.annotations.Endpoint;
-import com.ecs160.microservices.OllamaClient;
 
 @Microservice
 public class IssueSummarizerMicroservice {

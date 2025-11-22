@@ -1,15 +1,20 @@
 // debug test code edit/delete later
 
-package com.ecs160.tests;
+package com.ecs160;
 
 import okhttp3.*;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.TimeUnit;
 
 public class TestClient {
 
-    private static final OkHttpClient client = new OkHttpClient();
+   private static final OkHttpClient client = new OkHttpClient.Builder()
+            .connectTimeout(10, TimeUnit.SECONDS)  // connection timeout
+            .readTimeout(60, TimeUnit.SECONDS)    // give server up to 2 minutes to respond
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .build();
     private static final String BASE_URL = "http://localhost:8080";
 
     private static String sendGet(String endpoint, String jsonInput) throws IOException {

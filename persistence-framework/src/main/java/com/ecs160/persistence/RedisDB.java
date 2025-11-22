@@ -21,7 +21,7 @@ public class RedisDB {
 
     private Jedis jedisSession;
 
-    private RedisDB() {
+    public RedisDB() {
         jedisSession = new Jedis("localhost", 6379);;
     }
 
