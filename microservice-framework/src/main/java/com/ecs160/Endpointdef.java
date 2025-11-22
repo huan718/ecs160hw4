@@ -1,8 +1,5 @@
 package com.ecs160;
 
-import com.ecs160.annotations.Microservice;
-import com.ecs160.annotations.Endpoint;
-
 import java.lang.reflect.Method;
 import java.util.Objects;
 

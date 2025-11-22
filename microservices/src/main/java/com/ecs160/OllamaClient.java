@@ -1,4 +1,4 @@
-package com.ecs160.microservices;
+package com.ecs160;
 
 import okhttp3.*;
 import com.google.gson.*;
@@ -6,8 +6,6 @@ import com.google.gson.*;
 // delete later
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.IOException;
-
 import java.io.IOException;
 
 public class OllamaClient {   
