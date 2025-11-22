@@ -1,13 +1,11 @@
-// debug test code edit/delete later
-
-package com.ecs160.tests;
+package com.ecs160;
 
 import okhttp3.*;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
-public class TestClient {
+public class MicroserviceTest {
 
     private static final OkHttpClient client = new OkHttpClient();
     private static final String BASE_URL = "http://localhost:8080";

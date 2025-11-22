@@ -16,7 +16,8 @@ public class RequestDispatcher {
             Object result = endpoint.getMethod().invoke(endpoint.getInstance(), body);
             return result.toString();
         } catch (Exception e) {
-            return "500 Internal Server Error: " + e.getMessage();
+            Throwable cause = e.getCause() != null ? e.getCause() : e;
+            return "500 Internal Server Error: " + cause.getMessage();
         }
     }
 }
