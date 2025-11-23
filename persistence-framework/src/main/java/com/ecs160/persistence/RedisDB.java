@@ -98,55 +98,46 @@ public class RedisDB {
             MethodHandler handler = new MethodHandler() {
                 @Override
                 public Object invoke(Object self, Method thisMethod, Method proceed, Object[] args) throws Throwable {
-                    // Check for @LazyLoad on the method being called
                     if (thisMethod.isAnnotationPresent(LazyLoad.class)) {
-                        LazyLoad lazyAnn = thisMethod.getAnnotation(LazyLoad.class);
-                        String targetFieldName = lazyAnn.field();
+                        LazyLoad lazy = thisMethod.getAnnotation(LazyLoad.class);
+                        String targetFieldName = lazy.field();
 
                         Field field = clazz.getDeclaredField(targetFieldName);
                         field.setAccessible(true);
                         Object currentValue = field.get(self);
 
-                        // If null, it means we haven't loaded it yet. Load now!
                         if (currentValue == null) {
-                           // System.out.println("Lazy Loading triggered for: " + targetFieldName);
-                            if (field.getType() == List.class) {
+                            if (List.class.isAssignableFrom(field.getType())) {
                                 loadListField(self, field, clazz.getSimpleName() + ":" + idVal);
                             }
-                            // Return the newly loaded value
+                            
                             return field.get(self);
                         }
                     }
-                    // Delegate to the original method
+                    
                     return proceed.invoke(self, args);
                 }
             };
 
-            // Instantiate the proxy
             Object proxyObj = factory.create(new Class<?>[0], new Object[0], handler);
-
             idField.set(proxyObj, idVal);
 
             String redisKey = clazz.getSimpleName() + ":" + idVal.toString();
             Map<String, String> redisData = jedisSession.hgetAll(redisKey);
 
-            if (redisData.isEmpty()) return null; // Object not found
+            if (redisData.isEmpty()) return null; 
 
             for (Field field : clazz.getDeclaredFields()) {
                 field.setAccessible(true);
-                if (field.isAnnotationPresent(PersistableField.class)) {
-                    // Skip if this field corresponds to a LazyLoad method
-                    if (isFieldLazy(clazz, field.getName())) {
-                        continue; 
-                    }
 
-                    if (field.getType() == List.class) {
-                        loadListField(proxyObj, field, redisKey);
-                    } else {
-                        String val = redisData.get(field.getName());
-                        if (val != null) {
-                            field.set(proxyObj, convertToFieldType(field.getType(), val));
-                        }
+                if (!field.isAnnotationPresent(PersistableField.class)) continue;
+                if (field.isAnnotationPresent(LazyLoad.class)) continue;
+                if (List.class.isAssignableFrom(field.getType())) {
+                    loadListField(proxyObj, field, redisKey);
+                } else {
+                    String val = redisData.get(field.getName());
+                    if (val != null) {
+                        field.set(proxyObj, convertToFieldType(field.getType(), val));
                     }
                 }
             }
@@ -181,17 +172,6 @@ public class RedisDB {
         }
         
         field.set(target, children);
-    }
-
-    private boolean isFieldLazy(Class<?> clazz, String fieldName) {
-        for (Method m : clazz.getDeclaredMethods()) {
-            if (m.isAnnotationPresent(LazyLoad.class)) {
-                if (m.getAnnotation(LazyLoad.class).field().equals(fieldName)) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     private Field getIdField(Class<?> clazz) {
