@@ -14,9 +14,26 @@ public class RedisLoader implements AutoCloseable {
         this.jedis = new Jedis(host, port);
     }
 
+    /**
+     * Protected no-arg constructor for testing subclasses.
+     * Prevents real Jedis connection initialization.
+     */
+    protected RedisLoader() {
+        this.jedis = null;
+    }
+
+    /**
+     * Protected method acting as a "Seam" for testing.
+     * Tests can override this to return mock data without Mockito.
+     */
+    protected Map<String, String> fetchMapFromRedis(String key) {
+        return jedis.hgetAll(key);
+    }
+
     public Map<String, String> getRepo(String repoName) {
         String key = "repo-" + repoName;
-        return jedis.hgetAll(key);
+        // MUST call the protected method, not jedis directly
+        return fetchMapFromRedis(key);
     }
 
     public List<String> getIssueKeysForRepo(String repoName) {
@@ -33,16 +50,20 @@ public class RedisLoader implements AutoCloseable {
     }
 
     public Map<String, String> getIssue(String issueKey) {
-        return jedis.hgetAll(issueKey);
+        return fetchMapFromRedis(issueKey);
     }
 
     public String getIssueDescription(String issueKey) {
         Map<String, String> issueData = getIssue(issueKey);
+        // Handle null if the mock returns null
+        if (issueData == null) return ""; 
         return issueData.getOrDefault("Description", "");
     }
 
     @Override
     public void close() {
-        jedis.close();
+        if (jedis != null) {
+            jedis.close();
+        }
     }
 }
