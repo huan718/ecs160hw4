@@ -1,1 +1,16 @@
-com\ecs160\AppTest.class
+com/ecs160/MicroserviceRegistryTest$InvalidParamTypeService.class
+com/ecs160/MicroserviceRegistryTest$InvalidReturnTypeService.class
+com/ecs160/LauncherTest$EchoService.class
+com/ecs160/EndpointTest.class
+com/ecs160/MicroserviceRegistryTest.class
+com/ecs160/RequestDispatcherTest.class
+com/ecs160/MicroserviceRegistryTest$InvalidParamCountService.class
+com/ecs160/LauncherTest.class
+com/ecs160/MicroserviceRegistryTest$ValidService.class
+com/ecs160/SimpleHttpServerTest.class
+com/ecs160/LauncherTest$HelloService.class
+com/ecs160/RequestDispatcherTest$TestService.class
+com/ecs160/SimpleHttpServerTest$TestHttpService.class
+com/ecs160/MicroserviceRegistryTest$NoMicroserviceAnnotation.class
+com/ecs160/EndpointTest$MockObject.class
+com/ecs160/AppTest.class
