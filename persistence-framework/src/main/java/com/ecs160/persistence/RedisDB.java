@@ -18,11 +18,7 @@ public class RedisDB {
     private Jedis jedisSession;
 
     public RedisDB() {
-<<<<<<< HEAD
         jedisSession = new Jedis("localhost", 6379);
-=======
-        jedisSession = new Jedis("localhost", 6379);;
->>>>>>> Stephen
     }
 
     public boolean persist(Object obj) {
@@ -30,7 +26,6 @@ public class RedisDB {
         String className = clazz.getSimpleName();
 
         try {
-            // 1. Find and Validate ID
             Field idField = getIdField(clazz);
             if (idField == null) {
                 System.err.println("No @Id field found.");
@@ -45,30 +40,25 @@ public class RedisDB {
 
             String redisKey = className + ":" + idVal.toString();
 
-            // 2. Iterate Fields
             for (Field field : clazz.getDeclaredFields()) {
                 field.setAccessible(true);
                 if (field.isAnnotationPresent(PersistableField.class)) {
                     Object value = field.get(obj);
                     if (value != null) {
                         if (value instanceof List) {
-                            // --- Handle List (Children) ---
                             List<?> list = (List<?>) value;
                             String listKey = redisKey + ":" + field.getName();
                             jedisSession.del(listKey); // Clear old list
 
                             for (Object child : list) {
-                                // Recursive persist
                                 persist(child); 
                                 
-                                // Save Child ID reference
                                 Field childIdField = getIdField(child.getClass());
                                 Object childId = childIdField.get(child);
                                 String childRef = child.getClass().getName() + ":" + childId;
                                 jedisSession.rpush(listKey, childRef);
                             }
                         } else {
-                            // --- Handle Simple Field ---
                             jedisSession.hset(redisKey, field.getName(), value.toString());
                         }
                     }
@@ -90,18 +80,21 @@ public class RedisDB {
         }
 
         try {
-            // 1. Get ID from stub object
             Field idField = getIdField(clazz);
-            if (idField == null) return null;
+            if (idField == null) {
+                System.err.println("No @Id field found.");    
+                return null;
+            }
 
             Object idVal = idField.get(object);
-            if (idVal == null) return null;
+            if (idVal == null) {
+                System.err.println("@Id cannot be null.");
+                return null;
+            }
 
-            // 2. Create Javassist Proxy
             ProxyFactory factory = new ProxyFactory();
             factory.setSuperclass(clazz);
             
-            // Define the Handler (Interceptor)
             MethodHandler handler = new MethodHandler() {
                 @Override
                 public Object invoke(Object self, Method thisMethod, Method proceed, Object[] args) throws Throwable {
@@ -132,11 +125,8 @@ public class RedisDB {
             // Instantiate the proxy
             Object proxyObj = factory.create(new Class<?>[0], new Object[0], handler);
 
-            // 3. Populate ID on Proxy
             idField.set(proxyObj, idVal);
 
-            // 4. Populate Simple Fields (Eagerly) on Proxy
-            // We do NOT populate Lazy fields here.
             String redisKey = clazz.getSimpleName() + ":" + idVal.toString();
             Map<String, String> redisData = jedisSession.hgetAll(redisKey);
 
@@ -151,10 +141,8 @@ public class RedisDB {
                     }
 
                     if (field.getType() == List.class) {
-                        // Eager load list if NOT lazy
                         loadListField(proxyObj, field, redisKey);
                     } else {
-                        // Simple field
                         String val = redisData.get(field.getName());
                         if (val != null) {
                             field.set(proxyObj, convertToFieldType(field.getType(), val));
@@ -171,25 +159,20 @@ public class RedisDB {
         }
     }
 
-    // --- Helpers ---
-
     private void loadListField(Object target, Field field, String parentKey) throws Exception {
         String listKey = parentKey + ":" + field.getName();
         List<String> references = jedisSession.lrange(listKey, 0, -1);
         
         List<Object> children = new ArrayList<>();
         
-        // Determine generic type (e.g. List<Player>)
         ParameterizedType listType = (ParameterizedType) field.getGenericType();
         Class<?> childClass = (Class<?>) listType.getActualTypeArguments()[0];
 
         for (String ref : references) {
-            // ref format: "com.package.Player:10"
             String[] parts = ref.split(":");
             if (parts.length < 2) continue;
             String childId = parts[parts.length - 1];
 
-            // Recursively load child
             Object childStub = childClass.newInstance();
             Field childIdField = getIdField(childClass);
             childIdField.set(childStub, convertToFieldType(childIdField.getType(), childId));
