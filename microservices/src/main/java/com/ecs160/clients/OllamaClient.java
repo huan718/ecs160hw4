@@ -1,4 +1,4 @@
-package com.ecs160.microservices;
+package com.ecs160.clients;
 
 import okhttp3.*;
 import com.google.gson.*;
@@ -8,16 +8,23 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 
-import java.io.IOException;
+public class OllamaClient implements AIClient {    
+   private final String url;
+   private final String model;
+   private final OkHttpClient client;
+   private final Gson gson;
 
-public class OllamaClient {   
-   private static final String OLLAMA_URL = "http://localhost:11434/api/generate";
-   private static final OkHttpClient client = new OkHttpClient();
-   private static final Gson gson = new Gson();  
+   public OllamaClient(String url, String model) {
+      this.url = url;
+      this.model = model;
+      this.client = new OkHttpClient();
+      this.gson = new Gson();
+   }
 
-   public static String askDeepCoder(String prompt) throws IOException {
+   @Override
+   public String ask(String prompt) throws IOException {
       JsonObject payload = new JsonObject();
-      payload.addProperty("model", "deepcoder:1.5b");
+      payload.addProperty("model", this.model); 
       payload.addProperty("prompt", prompt);
 
       RequestBody body = RequestBody.create(
@@ -26,7 +33,7 @@ public class OllamaClient {
             );
 
       Request request = new Request.Builder()
-            .url(OLLAMA_URL)
+            .url(this.url)
             .post(body)
             .build();
       
