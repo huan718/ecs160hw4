@@ -18,11 +18,7 @@ public class RedisDB {
     private Jedis jedisSession;
 
     public RedisDB() {
-<<<<<<< HEAD
         jedisSession = new Jedis("localhost", 6379);
-=======
-        jedisSession = new Jedis("localhost", 6379);;
->>>>>>> Stephen
     }
 
     public boolean persist(Object obj) {

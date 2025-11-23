@@ -6,6 +6,7 @@ import com.google.gson.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;   
 
 public class OllamaClient implements AIClient {    
    private final String url;
@@ -19,7 +20,14 @@ public class OllamaClient implements AIClient {
    public OllamaClient(String url, String model) {
       this.url = url;
       this.model = model;
-      this.client = new OkHttpClient();
+
+
+      this.client = new OkHttpClient.Builder()
+            .connectTimeout(10, TimeUnit.SECONDS)    // how long to wait to connect
+            .readTimeout(120, TimeUnit.SECONDS)      // how long to wait for the model to stream tokens
+            .writeTimeout(10, TimeUnit.SECONDS)
+            .build();
+
       this.gson = new Gson();
    }
 
@@ -38,6 +46,8 @@ public class OllamaClient implements AIClient {
       payload.addProperty("model", this.model);
       payload.addProperty("prompt", prompt);
 
+
+
       return payload;
    }
 
@@ -45,7 +55,7 @@ public class OllamaClient implements AIClient {
       RequestBody body = RequestBody.create(
             payload.toString(),                  
             JSON_MEDIA_TYPE
-            );
+      );
 
       return new Request.Builder()
             .url(this.url)
@@ -55,29 +65,31 @@ public class OllamaClient implements AIClient {
 
    private String parseStreamResponse(Response response) throws IOException {
       if (!response.isSuccessful()) {
-            throw new IOException("Unexpected code " + response);
+         String errBody = response.body() != null ? response.body().string() : "";
+         throw new IOException("Unexpected code " + response.code() + " body=" + errBody);
+      }
+
+      BufferedReader reader = new BufferedReader(
+            new InputStreamReader(response.body().byteStream())
+      );
+      String line;
+      StringBuilder fullResponse = new StringBuilder();
+
+      while ((line = reader.readLine()) != null) {
+         line = line.trim();
+         if (line.isEmpty()) continue;
+
+         JsonObject obj = gson.fromJson(line, JsonObject.class);
+
+         if (obj.has("response")) {
+            fullResponse.append(obj.get("response").getAsString());
          }
 
-         BufferedReader reader = new BufferedReader(new InputStreamReader(response.body().byteStream()));
-         String line;
-         StringBuilder fullResponse = new StringBuilder();
-
-         while ((line = reader.readLine()) != null) {
-            line = line.trim();
-               if (line.isEmpty()) continue;
-
-               JsonObject obj = gson.fromJson(line, JsonObject.class);
-
-               if (obj.has("response")) {
-                  fullResponse.append(obj.get("response").getAsString());
-               }
-
-               if (obj.has("done") && obj.get("done").getAsBoolean()) {
-                  break;
-               }
-            }
+         if (obj.has("done") && obj.get("done").getAsBoolean()) {
+            break;
+         }
+      }
 
       return fullResponse.toString();
    }
 }
-   
