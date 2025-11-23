@@ -16,23 +16,6 @@ public class BugFinderMicroservice {
         this.client = client;
     }
 
-    /**
-     * Microservice B: analyze C source code and return ONLY JSON.
-     *
-     * Input (HTTP body, text/plain):
-     *   raw C source (string)
-     *
-     * Output (HTTP body):
-     *   - On success: JSON array of bug objects:
-     *       [
-     *         {"title": "...", "body": "..."},
-     *         ...
-     *       ]
-     *     If no bugs: []
-     *
-     *   - On error: JSON object:
-     *       {"error":"..."}
-     */
     @Endpoint(url = "/find_bugs")
     public String findBugs(String cSource) {
         try {
