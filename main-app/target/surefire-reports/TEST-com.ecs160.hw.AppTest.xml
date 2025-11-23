@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.ecs160.hw.AppTest" time="0.065" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.ecs160.hw.AppTest" time="0.044" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.class.path" value="C:\Users\steph\ECS160\ecs160hw2\main-app\target\test-classes;C:\Users\steph\ECS160\ecs160hw2\main-app\target\classes;C:\Users\steph\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\steph\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
+    <property name="java.class.path" value="C:\Users\steph\ECS160\ecs160hw2\main-app\target\test-classes;C:\Users\steph\ECS160\ecs160hw2\main-app\target\classes;C:\Users\steph\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\steph\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\steph\.m2\repository\com\squareup\okhttp3\okhttp\4.12.0\okhttp-4.12.0.jar;C:\Users\steph\.m2\repository\com\squareup\okio\okio\3.6.0\okio-3.6.0.jar;C:\Users\steph\.m2\repository\com\squareup\okio\okio-jvm\3.6.0\okio-jvm-3.6.0.jar;C:\Users\steph\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib-common\1.9.10\kotlin-stdlib-common-1.9.10.jar;C:\Users\steph\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib-jdk8\1.8.21\kotlin-stdlib-jdk8-1.8.21.jar;C:\Users\steph\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib\1.8.21\kotlin-stdlib-1.8.21.jar;C:\Users\steph\.m2\repository\org\jetbrains\annotations\13.0\annotations-13.0.jar;C:\Users\steph\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib-jdk7\1.8.21\kotlin-stdlib-jdk7-1.8.21.jar;C:\Users\steph\.m2\repository\com\google\code\gson\gson\2.11.0\gson-2.11.0.jar;C:\Users\steph\.m2\repository\com\google\errorprone\error_prone_annotations\2.27.0\error_prone_annotations-2.27.0.jar;C:\Users\steph\.m2\repository\redis\clients\jedis\5.1.0\jedis-5.1.0.jar;C:\Users\steph\.m2\repository\org\slf4j\slf4j-api\1.7.36\slf4j-api-1.7.36.jar;C:\Users\steph\.m2\repository\org\apache\commons\commons-pool2\2.12.0\commons-pool2-2.12.0.jar;C:\Users\steph\.m2\repository\org\json\json\20231013\json-20231013.jar;"/>
     <property name="java.vm.vendor" value="Eclipse Adoptium"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="user.variant" value=""/>
@@ -15,9 +15,9 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Eclipse Adoptium\jdk-17.0.17.10-hotspot\bin"/>
-    <property name="sun.java.command" value="C:\Users\steph\AppData\Local\Temp\surefire14825036469870936778\surefirebooter1111102017525024654.jar C:\Users\steph\AppData\Local\Temp\surefire14825036469870936778 2025-11-21T18-33-43_224-jvmRun1 surefire1567221481977852650tmp surefire_016175578534523168874tmp"/>
+    <property name="sun.java.command" value="C:\Users\steph\AppData\Local\Temp\surefire6423421349748076795\surefirebooter3379090330393119390.jar C:\Users\steph\AppData\Local\Temp\surefire6423421349748076795 2025-11-22T18-41-36_922-jvmRun1 surefire12610377619177465482tmp surefire_013489873069246885299tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="C:\Users\steph\ECS160\ecs160hw2\main-app\target\test-classes;C:\Users\steph\ECS160\ecs160hw2\main-app\target\classes;C:\Users\steph\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\steph\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
+    <property name="surefire.test.class.path" value="C:\Users\steph\ECS160\ecs160hw2\main-app\target\test-classes;C:\Users\steph\ECS160\ecs160hw2\main-app\target\classes;C:\Users\steph\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\steph\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\steph\.m2\repository\com\squareup\okhttp3\okhttp\4.12.0\okhttp-4.12.0.jar;C:\Users\steph\.m2\repository\com\squareup\okio\okio\3.6.0\okio-3.6.0.jar;C:\Users\steph\.m2\repository\com\squareup\okio\okio-jvm\3.6.0\okio-jvm-3.6.0.jar;C:\Users\steph\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib-common\1.9.10\kotlin-stdlib-common-1.9.10.jar;C:\Users\steph\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib-jdk8\1.8.21\kotlin-stdlib-jdk8-1.8.21.jar;C:\Users\steph\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib\1.8.21\kotlin-stdlib-1.8.21.jar;C:\Users\steph\.m2\repository\org\jetbrains\annotations\13.0\annotations-13.0.jar;C:\Users\steph\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib-jdk7\1.8.21\kotlin-stdlib-jdk7-1.8.21.jar;C:\Users\steph\.m2\repository\com\google\code\gson\gson\2.11.0\gson-2.11.0.jar;C:\Users\steph\.m2\repository\com\google\errorprone\error_prone_annotations\2.27.0\error_prone_annotations-2.27.0.jar;C:\Users\steph\.m2\repository\redis\clients\jedis\5.1.0\jedis-5.1.0.jar;C:\Users\steph\.m2\repository\org\slf4j\slf4j-api\1.7.36\slf4j-api-1.7.36.jar;C:\Users\steph\.m2\repository\org\apache\commons\commons-pool2\2.12.0\commons-pool2-2.12.0.jar;C:\Users\steph\.m2\repository\org\json\json\20231013\json-20231013.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\steph"/>
     <property name="user.language" value="en"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\steph\AppData\Local\Temp\surefire14825036469870936778\surefirebooter1111102017525024654.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\steph\AppData\Local\Temp\surefire6423421349748076795\surefirebooter3379090330393119390.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.17+10"/>
@@ -58,5 +58,5 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="shouldAnswerWithTrue" classname="com.ecs160.hw.AppTest" time="0.003"/>
+  <testcase name="shouldAnswerWithTrue" classname="com.ecs160.hw.AppTest" time="0.002"/>
 </testsuite>
