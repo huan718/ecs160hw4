@@ -22,6 +22,13 @@ public class OllamaClient implements AIClient {
       this.client = new OkHttpClient();
       this.gson = new Gson();
    }
+   // ADD THIS CONSTRUCTOR FOR TESTING
+   public OllamaClient(String url, String model, OkHttpClient client) {
+      this.url = url;
+      this.model = model;
+      this.client = client;
+      this.gson = new Gson();
+   }
 
    @Override
    public String ask(String prompt) throws IOException {
