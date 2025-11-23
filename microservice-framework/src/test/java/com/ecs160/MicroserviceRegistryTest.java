@@ -16,67 +16,59 @@ public class MicroserviceRegistryTest {
         registry = new MicroserviceRegistry();
     }
 
-    // ========== Valid Service for Reference ==========
+    //mock services
     @Microservice
     public static class ValidService {
         @Endpoint(url = "/ok")
         public String handleRequest(String input) { return "OK"; }
     }
 
-    // ========== Missing @Microservice Annotation ==========
     public static class NoMicroserviceAnnotation {
         @Endpoint(url = "/bad")
         public String handleRequest(String input) { return "BAD"; }
     }
 
-    // ========== Invalid Return Type ==========
     @Microservice
     public static class InvalidReturnTypeService {
         @Endpoint(url = "/wrongReturn")
         public int handleRequest(String input) { return 123; }
     }
 
-    // ========== Invalid Parameter Count ==========
     @Microservice
     public static class InvalidParamCountService {
         @Endpoint(url = "/wrongParams")
         public String handleRequest(String input, String extra) { return "No"; }
     }
 
-    // ========== Invalid Parameter Type ==========
     @Microservice
     public static class InvalidParamTypeService {
         @Endpoint(url = "/wrongType")
         public String handleRequest(int notString) { return "No"; }
     }
 
-
-    // ===================================================================
-    //                            TEST CASES
-    // ===================================================================
-
+    //test cases
     @Test(expected = RuntimeException.class)
-    public void testMissingMicroserviceAnnotationThrows() {
+    public void No_Annotation_Test() {
         registry.register(new NoMicroserviceAnnotation());
     }
 
     @Test(expected = RuntimeException.class)
-    public void testInvalidReturnTypeThrows() {
+    public void Invalid_Return_Type_Test() {
         registry.register(new InvalidReturnTypeService());
     }
 
     @Test(expected = RuntimeException.class)
-    public void testInvalidParameterCountThrows() {
+    public void Invalid_Param_Count_Test() {
         registry.register(new InvalidParamCountService());
     }
 
     @Test(expected = RuntimeException.class)
-    public void testInvalidParameterTypeThrows() {
+    public void Invalid_Param_Type_Test() {
         registry.register(new InvalidParamTypeService());
     }
 
     @Test
-    public void testValidServiceRegistersNormally() {
+    public void Valid_Serivce_Test() {
         registry.register(new ValidService());
         assertNotNull(registry.get("/ok"));
     }

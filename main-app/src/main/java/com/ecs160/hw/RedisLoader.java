@@ -1,18 +1,12 @@
 package com.ecs160.hw;
 
-import redis.clients.jedis.Jedis;
-
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- * Read-only helper to load Repo + Issue info from the HW1 Redis database.
- * Assumes keys:
- *   Repo:  repo-<name>  (e.g., "repo-rust")
- *     Fields: Url, CreatedAt, AuthorName, Issues
- *   Issue: iss-<repoName>-<index>  (e.g., "iss-rust-1")
- *     Fields: Date, Description
- */
+import redis.clients.jedis.Jedis;
+
 public class RedisLoader implements AutoCloseable {
     private final Jedis jedis;
 
