@@ -4,10 +4,12 @@ public class RequestDispatcher {
 
     private final MicroserviceRegistry registry;
 
+    //constructor
     public RequestDispatcher(MicroserviceRegistry registry) {
         this.registry = registry;
     }
 
+    //dispatch request to appropriate microservice endpoint
     public String dispatch(String path, String body) {
         Endpointdef endpoint = registry.get(path);
         if (endpoint == null) return "404 Not Found: " + path;

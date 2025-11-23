@@ -20,18 +20,16 @@ public class SimpleHttpServerTest {
     private SimpleHttpServer server;
     private MicroserviceRegistry registry;
     private RequestDispatcher dispatcher;
-
     private final int port = 8085; 
-
+    //mock service
     @Microservice
     public static class TestHttpService {
         @Endpoint(url = "/hello")
         public String handleRequest(String input) {
-            // "input" comes from the HTTP Request Body
             return "Hello, " + input;
         }
     }
-
+    //server setup and shutdown
     @Before
     public void setUp() throws Exception {
         registry = new MicroserviceRegistry();
@@ -43,48 +41,38 @@ public class SimpleHttpServerTest {
     }
 
     @After
-    public void tearDown() {
+    public void shutDown() {
         server.stop();
     }
 
     @Test
-    public void testHttpRequestReturnsCorrectResponse() throws Exception {
-        // 1. Use pure path (Avoids 404 if server doesn't strip query params)
+    public void Correct_Response_Test() throws Exception {
         URL url = new URL("http://localhost:" + port + "/hello");
+        HttpURLConnection temp = (HttpURLConnection) url.openConnection();
 
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        
-        // 2. Use POST to send data in the Body (since Dispatcher reads Body)
-        conn.setRequestMethod("POST");
-        conn.setDoOutput(true);
+        temp.setRequestMethod("POST");
+        temp.setDoOutput(true);
 
-        // 3. Write "World" to the output stream
-        try (OutputStream os = conn.getOutputStream()) {
+        try (OutputStream os = temp.getOutputStream()) {
             byte[] input = "World".getBytes(StandardCharsets.UTF_8);
             os.write(input, 0, input.length);
         }
 
-        int status = conn.getResponseCode();
-        assertEquals(200, status);
+        assertEquals(200, temp.getResponseCode());
 
-        BufferedReader reader =
-                new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
+        BufferedReader reader = new BufferedReader(new InputStreamReader(temp.getInputStream()));
         String response = reader.readLine().trim();
         reader.close();
 
-        // 4. Expectation matches
         assertEquals("Hello, World", response);
     }
 
     @Test
-    public void testUnknownUrlReturns404() throws Exception {
+    public void Unknown_URL_Test() throws Exception {
         URL url = new URL("http://localhost:" + port + "/missing");
+        HttpURLConnection temp = (HttpURLConnection) url.openConnection();
+        temp.setRequestMethod("GET");
 
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
-
-        int status = conn.getResponseCode();
-        assertEquals(404, status);
+        assertEquals(404, temp.getResponseCode());
     }
 }

@@ -14,12 +14,12 @@ public class MicroserviceRegistry {
    public void register(Object service) {
       Class<?> clazz = service.getClass();
 
-      // Only register if annotated with @Microservice
+      //filter only classes annotated with @Microservice
       if (!clazz.isAnnotationPresent(Microservice.class)) {
          throw new IllegalArgumentException(clazz.getName() + " is not annotated with @Microservice");
       }
 
-      // Look for methods annotated with @Endpoint
+      //loop through methods to find those annotated with @Endpoint
       for (Method method : clazz.getDeclaredMethods()) {
          if (method.isAnnotationPresent(Endpoint.class)) {
                String url = method.getAnnotation(Endpoint.class).url();
@@ -29,12 +29,13 @@ public class MicroserviceRegistry {
       }
    }
 
+   //retrieve endpoint by url
    public Endpointdef get(String url) {
       return endpoints.get(url);
    }
 
+   //validate that endpoint method has correct signature
    private void validateEndpointMethod(Method method) {
-      // Method must be: String handleRequest(String input)
       if (!method.getReturnType().equals(String.class)
                || method.getParameterCount() != 1
                || !method.getParameterTypes()[0].equals(String.class)) {

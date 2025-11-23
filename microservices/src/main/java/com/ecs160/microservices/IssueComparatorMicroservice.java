@@ -9,18 +9,6 @@ import com.google.gson.*;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Microservice C:
- * Accepts JSON containing:
- * {
- *    "issueList1": [ ... ],
- *    "issueList2": [ ... ]
- * }
- * And returns:
- * {
- *    "commonIssues": [ ... ]
- * }
- */
 @Microservice
 public class IssueComparatorMicroservice {
     private final AIClient client; 

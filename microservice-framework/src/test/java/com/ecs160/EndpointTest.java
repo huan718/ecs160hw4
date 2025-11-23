@@ -10,7 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class EndpointTest {
-    // mocked data
+    //mocked data
     static class MockObject {
         public String getData(int value) {
             return "Data " + value;
@@ -20,19 +20,15 @@ public class EndpointTest {
     private static final Object MOCK_INSTANCE = new MockObject();
     private static Method MOCK_METHOD;
     private static final String MOCK_URL = "/api/v1/data";
-
+     
     @BeforeClass
     public static void setup() throws NoSuchMethodException {
-        // FIXED 1: Method name must match MockObject ("getData", not "data")
         MOCK_METHOD = MockObject.class.getMethod("getData", int.class);
         assumeNotNull(MOCK_METHOD); 
     }
 
-    // --- Test Cases ---
-
     @Test
-    public void testConstructorAndGetters_validInput() {
-        // FIXED 2: Changed 'Endpointdef' to 'Endpoint'
+    public void Constructor_Getter_Test() {
         Endpointdef endpoint = new Endpointdef(MOCK_INSTANCE, MOCK_METHOD, MOCK_URL);
 
         assertNotNull(endpoint);
@@ -41,19 +37,19 @@ public class EndpointTest {
         assertEquals(MOCK_URL, endpoint.getUrl());
     }
 
-    // null tests
+    //null tests
     @Test(expected = NullPointerException.class)
-    public void nullinstance_test() {
+    public void null_instance_test() {
         new Endpointdef(null, MOCK_METHOD, MOCK_URL);
     }
 
     @Test(expected = NullPointerException.class)
-    public void nullmethod_test() {
+    public void null_method_test() {
         new Endpointdef(MOCK_INSTANCE, null, MOCK_URL);
     }
 
     @Test(expected = NullPointerException.class)
-    public void nullurl_test() {
+    public void null_url_test() {
         new Endpointdef(MOCK_INSTANCE, MOCK_METHOD, null);
     }
 }

@@ -15,7 +15,7 @@ import redis.clients.jedis.Jedis;
 @PersistableObject
 public class RedisDB {
 
-    private Jedis jedisSession;
+    private final Jedis jedisSession;
 
     public RedisDB() {
         jedisSession = new Jedis("localhost", 6379);
