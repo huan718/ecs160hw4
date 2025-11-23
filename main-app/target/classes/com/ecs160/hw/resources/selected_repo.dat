@@ -1,5 +1,0 @@
-curl
-src/tool_operate.c
-src/tool_urlglob.c
-lib/file.c
-lib/transfer.c
