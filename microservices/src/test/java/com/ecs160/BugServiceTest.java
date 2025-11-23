@@ -13,10 +13,12 @@ public class BugServiceTest {
     public void Returns_Correct_Test() {
         String expectedResponse = "[\"Buffer Overflow\", \"Null Pointer\"]";
         
+        String cCode = "int main() { return 0; }";
+
         AIClient mockClient = new AIClient() {
             @Override
             public String ask(String prompt) throws IOException {
-                if (prompt.contains("Analyze this C code")) {
+                if (prompt.contains(cCode) || prompt.contains("static analysis assistant")) {
                     return expectedResponse;
                 }
                 return null;
@@ -25,7 +27,6 @@ public class BugServiceTest {
 
         BugFinderMicroservice service = new BugFinderMicroservice(mockClient);
 
-        String cCode = "int main() { return 0; }";
         String result = service.findBugs(cCode);
 
         assertEquals(expectedResponse, result);
