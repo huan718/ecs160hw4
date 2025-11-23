@@ -17,15 +17,18 @@ public class BugFinderMicroservice {
     @Endpoint(url = "/find_bugs")
     public String findBugs(String code) {
         try {
-            String prompt = "Analyze this C code and return a JSON array of Issues:\n" + code;
-            String response = client.ask(prompt);
-
-            return response;
+            String prompt = "Analyze this C code and extract potential bugs. " +
+                        "Return ONLY a JSON array of issue strings.\n\n" + code;
+            String ollamaResponse = client.ask(prompt);
+            if (ollamaResponse == null || ollamaResponse.isBlank()) {
+                return "{ \"error\": \"LLM returned null or blank response\" }";
+            }   
+            return ollamaResponse;
 
         } catch (Exception e) {
             return "{ \\\"error\\\": \\\"" + e.getMessage() + "\\\" }";
         }
         
-    }
+    }   
 }
 
