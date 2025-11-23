@@ -15,7 +15,7 @@ public class Issue {
    }
 
    // Public getters
-   public String getBugType() { return bugType; }
+   public String getBugType() { return bug_type; }
    public int getLine() { return line; }
    public String getDescription() { return description; }
    public String getFilename() { return filename; }
