@@ -12,7 +12,8 @@ public class SummarizerTest {
     @Test
     public void SummarizeIssue_Success_Test() {
         String mockSummary = "{ \"summary\": \"This is a short summary\" }";
-        
+
+        // Mock client 
         AIClient mockClient = new AIClient() {
             @Override
             public String ask(String prompt) throws IOException {
@@ -28,6 +29,7 @@ public class SummarizerTest {
         String inputJson = "{ \"title\": \"Bug in UI\", \"body\": \"Buttons are broken\" }";
         String result = service.summarizeIssue(inputJson);
 
+        // Success case
         assertEquals(mockSummary, result);
     }
 
@@ -44,6 +46,7 @@ public class SummarizerTest {
         
         String result = service.summarizeIssue("{}");
 
+        // Fail case
         assertTrue(result.contains("Network failure"));
         assertTrue(result.contains("error"));
     }

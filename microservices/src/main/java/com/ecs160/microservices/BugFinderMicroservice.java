@@ -8,7 +8,6 @@ import com.google.gson.JsonArray;
 
 @Microservice
 public class BugFinderMicroservice {
-
     private final AIClient client;
     private final Gson gson = new Gson();
 
@@ -25,23 +24,19 @@ public class BugFinderMicroservice {
 
             // Prompt the model to return ONLY JSON
             String prompt =
-                    "You are a static analysis assistant for C code.\n" +
-                    "You will be given the full C source file.\n\n" +
-                    "Your job is to identify potential bugs or issues in the code.\n\n" +
-                    "Respond ONLY with a JSON array. Each element must be an object with keys " +
+                    "Given C source code file, identify potential bugs or issues in the code." +
+                    " Give the response only in a JSON array where each element is an object with keys " +
                     "{\"title\", \"body\"}:\n" +
                     "  - \"title\": one short phrase naming the bug (e.g., \"Null pointer dereference\").\n" +
-                    "  - \"body\": 1–3 sentences explaining why this is a bug, referencing specific functions/lines.\n\n" +
-                    "If you do not see any bugs, respond with an empty JSON array: []\n\n" +
-                    "CRITICAL RULES:\n" +
-                    "  - DO NOT include any explanation, commentary, or markdown outside the JSON.\n" +
-                    "  - DO NOT use code fences.\n" +
-                    "  - DO NOT include a top-level object; the top-level must be a JSON array.\n\n" +
+                    "  - \"body\": 1–3 sentences the bug with specific functions/lines.\n\n" + 
+                    "Return an empty JSON array:[] if there are no bugs."
+                    "Additionally, do not include explanation, commentary, or markdown outside the JSON, code fences, or a top-level object that isn't a JSON array." +
                     "Here is the C source code:\n\n" +
                     cSource;
 
             String raw = client.ask(prompt);
 
+            // Error handling with null source code/responses
             if (raw == null || raw.isBlank()) {
                 return "{\"error\":\"LLM returned null or blank\"}";
             }

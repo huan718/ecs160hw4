@@ -13,6 +13,7 @@ public class ComparatorTest {
 
     private IssueComparatorMicroservice service;
 
+    // Mock service setup
     @Before
     public void setUp() {
         AIClient dummyClient = new AIClient() {
@@ -44,6 +45,7 @@ public class ComparatorTest {
         JsonObject resultObj = JsonParser.parseString(resultJson).getAsJsonObject();
         JsonArray common = resultObj.getAsJsonArray("commonIssues");
         
+        // Only finds B as common
         assertEquals(1, common.size());
         assertEquals("issue_B", common.get(0).getAsString());
     }
@@ -66,6 +68,7 @@ public class ComparatorTest {
         JsonObject resultObj = JsonParser.parseString(resultJson).getAsJsonObject();
         JsonArray common = resultObj.getAsJsonArray("commonIssues");
         
+        // Mocks no shared issues
         assertEquals(0, common.size());
     }
 }

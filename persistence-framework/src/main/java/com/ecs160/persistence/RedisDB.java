@@ -26,12 +26,14 @@ public class RedisDB {
         String className = clazz.getSimpleName();
 
         try {
+            // Finds field with Id as Redis key
             Field idField = getIdField(clazz);
             if (idField == null) {
                 System.err.println("No @Id field found.");
                 return false;
             }
 
+            // Null handling
             Object idVal = idField.get(obj);
             if (idVal == null) {
                 System.err.println("@Id cannot be null.");
@@ -45,11 +47,13 @@ public class RedisDB {
                 if (field.isAnnotationPresent(PersistableField.class)) {
                     Object value = field.get(obj);
                     if (value != null) {
+                        // If list recursively persist element
                         if (value instanceof List) {
                             List<?> list = (List<?>) value;
                             String listKey = redisKey + ":" + field.getName();
                             jedisSession.del(listKey); // Clear old list
 
+                            // Handle child objects
                             for (Object child : list) {
                                 persist(child); 
                                 
@@ -59,6 +63,7 @@ public class RedisDB {
                                 jedisSession.rpush(listKey, childRef);
                             }
                         } else {
+                            // Otherwise store as hash in Redis
                             jedisSession.hset(redisKey, field.getName(), value.toString());
                         }
                     }
@@ -75,11 +80,13 @@ public class RedisDB {
     public Object load(Object object) {
         Class<?> clazz = object.getClass();
 
+        // Check for non-persistable object
         if (!clazz.isAnnotationPresent(PersistableObject.class)) {
             throw new RuntimeException("Class is not persistable");
         }
 
         try {
+            // Get Id field and null handling
             Field idField = getIdField(clazz);
             if (idField == null) {
                 System.err.println("No @Id field found.");    
@@ -92,20 +99,26 @@ public class RedisDB {
                 return null;
             }
 
+            // Create proxy factory and set parent class
             ProxyFactory factory = new ProxyFactory();
             factory.setSuperclass(clazz);
             
+            // Implement interface MethodHandler
             MethodHandler handler = new MethodHandler() {
+                // Override invoke method
                 @Override
                 public Object invoke(Object self, Method thisMethod, Method proceed, Object[] args) throws Throwable {
                     if (thisMethod.isAnnotationPresent(LazyLoad.class)) {
+                        // Get field name target in annotation
                         LazyLoad lazy = thisMethod.getAnnotation(LazyLoad.class);
                         String targetFieldName = lazy.field();
 
+                        // Lazy load null values
                         Field field = clazz.getDeclaredField(targetFieldName);
                         field.setAccessible(true);
                         Object currentValue = field.get(self);
 
+                        // Load empty fields
                         if (currentValue == null) {
                             if (List.class.isAssignableFrom(field.getType())) {
                                 loadListField(self, field, clazz.getSimpleName() + ":" + idVal);
@@ -115,23 +128,30 @@ public class RedisDB {
                         }
                     }
                     
+                    // Return original method if no lazy load
                     return proceed.invoke(self, args);
                 }
             };
 
+            // Create proxy object and set handler
             Object proxyObj = factory.create(new Class<?>[0], new Object[0], handler);
             idField.set(proxyObj, idVal);
 
+            // Build Redis key 
             String redisKey = clazz.getSimpleName() + ":" + idVal.toString();
             Map<String, String> redisData = jedisSession.hgetAll(redisKey);
 
             if (redisData.isEmpty()) return null; 
 
+            // Iterate through fields and load non-lazy
             for (Field field : clazz.getDeclaredFields()) {
                 field.setAccessible(true);
 
+                // Skip non-persistent fields
                 if (!field.isAnnotationPresent(PersistableField.class)) continue;
+                // Skip lazy-loaded fields
                 if (field.isAnnotationPresent(LazyLoad.class)) continue;
+                // List handling
                 if (List.class.isAssignableFrom(field.getType())) {
                     loadListField(proxyObj, field, redisKey);
                 } else {
@@ -150,7 +170,9 @@ public class RedisDB {
         }
     }
 
+    // Helper function to load a list in Redis
     private void loadListField(Object target, Field field, String parentKey) throws Exception {
+        // Build key
         String listKey = parentKey + ":" + field.getName();
         List<String> references = jedisSession.lrange(listKey, 0, -1);
         
@@ -159,6 +181,7 @@ public class RedisDB {
         ParameterizedType listType = (ParameterizedType) field.getGenericType();
         Class<?> childClass = (Class<?>) listType.getActualTypeArguments()[0];
 
+        // Create stub object per reference
         for (String ref : references) {
             String[] parts = ref.split(":");
             if (parts.length < 2) continue;
@@ -168,12 +191,14 @@ public class RedisDB {
             Field childIdField = getIdField(childClass);
             childIdField.set(childStub, convertToFieldType(childIdField.getType(), childId));
             
+            // Create list of parent's object field
             children.add(load(childStub));
         }
         
         field.set(target, children);
     }
 
+    // Helper to iterate through and get id field of a class
     private Field getIdField(Class<?> clazz) {
         for (Field f : clazz.getDeclaredFields()) {
             f.setAccessible(true);
@@ -184,6 +209,7 @@ public class RedisDB {
         return null;
     }
 
+    // Helper function to convert various simple class types to string
     private Object convertToFieldType(Class<?> type, String value) {
         if (type == String.class) return value;
         if (type == int.class || type == Integer.class) return Integer.parseInt(value);

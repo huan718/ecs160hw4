@@ -14,22 +14,20 @@ public class IssueSummarizerMicroservice {
         this.client = client;
     }
 
-
     @Endpoint(url = "/summarize_issue")
     public String summarizeIssue(String issueJson) {            
         try {
             String prompt = 
-                "Summarize this GitHub issue. " +
-                "Respond ONLY with a valid JSON object using keys {\"title\", \"body\"}. " +
-                "DO NOT include explanations, thoughts, or preamble. " +
-                "ONLY output pure JSON:\n" + issueJson;
+                "Given the Github issues summarize it and respond ONLY with a valid JSON object using keys {\"title\", \"body\"}. " +
+                "DO NOT include explanations, thoughts, or preamble and ONLY output pure JSON:\n" + issueJson;  
 
+            // Null and edge case handling
             String raw = client.ask(prompt);
 
             if (raw == null || raw.isBlank())
                 return "{\"error\":\"LLM returned null\"}";
 
-            // Extract the FIRST JSON object
+            // Extract first JSON object
             int start = raw.indexOf("{");
             int end = raw.lastIndexOf("}");
 

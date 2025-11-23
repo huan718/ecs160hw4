@@ -15,6 +15,7 @@ public class BugServiceTest {
         
         String cCode = "int main() { return 0; }";
 
+        // Mock client and service
         AIClient mockClient = new AIClient() {
             @Override
             public String ask(String prompt) throws IOException {
@@ -28,12 +29,13 @@ public class BugServiceTest {
         BugFinderMicroservice service = new BugFinderMicroservice(mockClient);
 
         String result = service.findBugs(cCode);
-
+        // Mocks accurate repsonse
         assertEquals(expectedResponse, result);
     }
 
     @Test
     public void Null_Reponse_Test() {
+        // Mock null client
         AIClient nullClient = new AIClient() {
             @Override
             public String ask(String prompt) {
