@@ -49,12 +49,9 @@ dump.rdb
 ```
 Replace local DB with prepopulated one by doing
 ```
-sudo service redis-server stop
-sudo cp dump.rdb /var/lib/redis/dump.rdb
-sudo cp dump.rdb /var/lib/redis/dump.rdb
-sudo service redis-server start
+redis-server --dbfilename dump.rdb --dir .
 ```
-
+starts a local server with the file
 ---
 
 ### 3. Running the Program
