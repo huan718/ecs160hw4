@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.ecs160.hw.RedisLoaderTest" time="0.005" tests="6" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="17"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\steph\ECS160\ecs160hw2\main-app\target\test-classes;C:\Users\steph\ECS160\ecs160hw2\main-app\target\classes;C:\Users\steph\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\steph\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\steph\.m2\repository\com\squareup\okhttp3\okhttp\4.12.0\okhttp-4.12.0.jar;C:\Users\steph\.m2\repository\com\squareup\okio\okio\3.6.0\okio-3.6.0.jar;C:\Users\steph\.m2\repository\com\squareup\okio\okio-jvm\3.6.0\okio-jvm-3.6.0.jar;C:\Users\steph\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib-common\1.9.10\kotlin-stdlib-common-1.9.10.jar;C:\Users\steph\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib-jdk8\1.8.21\kotlin-stdlib-jdk8-1.8.21.jar;C:\Users\steph\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib\1.8.21\kotlin-stdlib-1.8.21.jar;C:\Users\steph\.m2\repository\org\jetbrains\annotations\13.0\annotations-13.0.jar;C:\Users\steph\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib-jdk7\1.8.21\kotlin-stdlib-jdk7-1.8.21.jar;C:\Users\steph\.m2\repository\com\google\code\gson\gson\2.11.0\gson-2.11.0.jar;C:\Users\steph\.m2\repository\com\google\errorprone\error_prone_annotations\2.27.0\error_prone_annotations-2.27.0.jar;C:\Users\steph\.m2\repository\redis\clients\jedis\5.1.0\jedis-5.1.0.jar;C:\Users\steph\.m2\repository\org\slf4j\slf4j-api\1.7.36\slf4j-api-1.7.36.jar;C:\Users\steph\.m2\repository\org\apache\commons\commons-pool2\2.12.0\commons-pool2-2.12.0.jar;C:\Users\steph\.m2\repository\org\json\json\20231013\json-20231013.jar;"/>
+    <property name="java.vm.vendor" value="Eclipse Adoptium"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://adoptium.net/"/>
+    <property name="user.timezone" value="America/Los_Angeles"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="17"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Eclipse Adoptium\jdk-17.0.17.10-hotspot\bin"/>
+    <property name="sun.java.command" value="C:\Users\steph\AppData\Local\Temp\surefire7916560258917687062\surefirebooter11616618151276373406.jar C:\Users\steph\AppData\Local\Temp\surefire7916560258917687062 2025-11-23T01-02-43_773-jvmRun1 surefire17199644030700627881tmp surefire_02052420422154801446tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\steph\ECS160\ecs160hw2\main-app\target\test-classes;C:\Users\steph\ECS160\ecs160hw2\main-app\target\classes;C:\Users\steph\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\steph\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\steph\.m2\repository\com\squareup\okhttp3\okhttp\4.12.0\okhttp-4.12.0.jar;C:\Users\steph\.m2\repository\com\squareup\okio\okio\3.6.0\okio-3.6.0.jar;C:\Users\steph\.m2\repository\com\squareup\okio\okio-jvm\3.6.0\okio-jvm-3.6.0.jar;C:\Users\steph\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib-common\1.9.10\kotlin-stdlib-common-1.9.10.jar;C:\Users\steph\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib-jdk8\1.8.21\kotlin-stdlib-jdk8-1.8.21.jar;C:\Users\steph\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib\1.8.21\kotlin-stdlib-1.8.21.jar;C:\Users\steph\.m2\repository\org\jetbrains\annotations\13.0\annotations-13.0.jar;C:\Users\steph\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib-jdk7\1.8.21\kotlin-stdlib-jdk7-1.8.21.jar;C:\Users\steph\.m2\repository\com\google\code\gson\gson\2.11.0\gson-2.11.0.jar;C:\Users\steph\.m2\repository\com\google\errorprone\error_prone_annotations\2.27.0\error_prone_annotations-2.27.0.jar;C:\Users\steph\.m2\repository\redis\clients\jedis\5.1.0\jedis-5.1.0.jar;C:\Users\steph\.m2\repository\org\slf4j\slf4j-api\1.7.36\slf4j-api-1.7.36.jar;C:\Users\steph\.m2\repository\org\apache\commons\commons-pool2\2.12.0\commons-pool2-2.12.0.jar;C:\Users\steph\.m2\repository\org\json\json\20231013\json-20231013.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\steph"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2025-10-21"/>
+    <property name="java.home" value="C:\Program Files\Eclipse Adoptium\jdk-17.0.17.10-hotspot"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\steph\ECS160\ecs160hw2\main-app"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\steph\AppData\Local\Temp\surefire7916560258917687062\surefirebooter11616618151276373406.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="17.0.17+10"/>
+    <property name="user.name" value="steph"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="Cp1252"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Temurin-17.0.17+10"/>
+    <property name="localRepository" value="C:\Users\steph\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+    <property name="java.io.tmpdir" value="C:\Users\steph\AppData\Local\Temp\"/>
+    <property name="java.version" value="17.0.17"/>
+    <property name="user.dir" value="C:\Users\steph\ECS160\ecs160hw2\main-app"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Eclipse Adoptium\jdk-17.0.17.10-hotspot\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;c:\Users\steph\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\debugCommand;c:\Users\steph\AppData\Roaming\Code\User\globalStorage\github.copilot-chat\copilotCli;C:\Program Files\Eclipse Adoptium\jdk-17.0.17.10-hotspot\bin;C:\Program Files\Eclipse Adoptium\jdk-25.0.1.8-hotspot\bin;c:\Users\steph\AppData\Local\Programs\cursor\resources\app\bin;C:\Users\steph\AppData\Local\Google\Chrome\Application;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\MySQL\MySQL Server 8.0\bin;C:\Users\steph\mingw64\bin;C:\Program Files (x86)\Pulse Secure\VC142.CRT\X64\;C:\Program Files (x86)\Pulse Secure\VC142.CRT\X86\;C:\Program Files (x86)\Common Files\Pulse Secure\TNC Client Plugin\;C:\Program Files\Go\bin;C:\Program Files\swipl\bin;C:\Program Files (x86)\Steel Bank Common Lisp\;C:\Program Files\Git\cmd;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\steph\AppData\Local\Programs\Python\Python312\Scripts\;C:\Users\steph\AppData\Local\Programs\Python\Python312\;C:\Users\steph\AppData\Local\Microsoft\WindowsApps;C:\Users\steph\go\bin;C:\Program;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files\maven-mvnd-1.0.3-windows-amd64\mvn\bin;;C:\Program Files\Docker\Docker\resources\bin;C:\Users\steph\AppData\Local\Programs\Python\Python311\Scripts\;C:\Users\steph\AppData\Local\Programs\Python\Python311\;C:\Users\steph\AppData\Local\Programs\Python\Python313\Scripts\;C:\Users\steph\AppData\Local\Programs\Python\Python313\;C:\Users\steph\.local\bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\steph\AppData\Local\Programs\Python\Python312\Scripts\;C:\Users\steph\AppData\Local\Programs\Python\Python312\;C:\Users\steph\AppData\Local\Microsoft\WindowsApps;C:\Users\steph\go\bin;C:\Users\steph\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files (x86)\clisp-2.48;C:\Users\steph\AppData\Local\Programs\cursor\resources\app\bin;C:\flutter\src\flutter\bin;C:\Users\steph\AppData\Local\GitHubDesktop\bin;C:\Users\steph\AppData\Local\Programs\Ollama;c:\Users\steph\.vscode\extensions\vscjava.vscode-java-debug-0.58.3\bundled\scripts\noConfigScripts;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.vendor" value="Eclipse Adoptium"/>
+    <property name="java.vm.version" value="17.0.17+10"/>
+    <property name="java.specification.maintenance.version" value="1"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="61.0"/>
+  </properties>
+  <testcase name="testGetIssueDescription" classname="com.ecs160.hw.RedisLoaderTest" time="0"/>
+  <testcase name="testGetIssueKeysReturnsEmptyListWhenFieldMissing" classname="com.ecs160.hw.RedisLoaderTest" time="0"/>
+  <testcase name="testGetIssueKeysReturnsEmptyListWhenNoData" classname="com.ecs160.hw.RedisLoaderTest" time="0"/>
+  <testcase name="testGetIssueDescriptionReturnsEmptyIfMissing" classname="com.ecs160.hw.RedisLoaderTest" time="0"/>
+  <testcase name="testGetIssueKeysParsesString" classname="com.ecs160.hw.RedisLoaderTest" time="0"/>
+  <testcase name="testGetRepoReturnsData" classname="com.ecs160.hw.RedisLoaderTest" time="0"/>
+</testsuite>
