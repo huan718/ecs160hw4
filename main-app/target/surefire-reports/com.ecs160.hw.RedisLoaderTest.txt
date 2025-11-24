@@ -1,8 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.ecs160.hw.RedisLoaderTest
--------------------------------------------------------------------------------
-<<<<<<< HEAD
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s - in com.ecs160.hw.RedisLoaderTest
-=======
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 s - in com.ecs160.hw.RedisLoaderTest
->>>>>>> 6e1559e3999b555e323e438c1df6b9ec81b7de86

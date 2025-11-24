@@ -1,8 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.ecs160.hw.SelectedRepoConfigTest
 -------------------------------------------------------------------------------
-<<<<<<< HEAD
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s - in com.ecs160.hw.SelectedRepoConfigTest
-=======
 Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in com.ecs160.hw.SelectedRepoConfigTest
->>>>>>> 6e1559e3999b555e323e438c1df6b9ec81b7de86

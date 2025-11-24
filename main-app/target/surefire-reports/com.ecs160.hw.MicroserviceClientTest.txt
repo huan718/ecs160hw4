@@ -1,8 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.ecs160.hw.MicroserviceClientTest
 -------------------------------------------------------------------------------
-<<<<<<< HEAD
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.96 s - in com.ecs160.hw.MicroserviceClientTest
-=======
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.208 s - in com.ecs160.hw.MicroserviceClientTest
->>>>>>> 6e1559e3999b555e323e438c1df6b9ec81b7de86
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.805 s - in com.ecs160.hw.MicroserviceClientTest

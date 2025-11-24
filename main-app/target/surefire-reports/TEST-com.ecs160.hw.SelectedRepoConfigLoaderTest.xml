@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.ecs160.hw.SelectedRepoConfigLoaderTest" time="0.007" tests="3" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.ecs160.hw.SelectedRepoConfigLoaderTest" time="0.012" tests="3" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -16,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Eclipse Adoptium\jdk-17.0.17.10-hotspot\bin"/>
-    <property name="sun.java.command" value="C:\Users\steph\AppData\Local\Temp\surefire7220878030979925777\surefirebooter11011404481906361480.jar C:\Users\steph\AppData\Local\Temp\surefire7220878030979925777 2025-11-23T21-45-48_809-jvmRun1 surefire14566414845848146540tmp surefire_08119149743322734713tmp"/>
+    <property name="sun.java.command" value="C:\Users\steph\AppData\Local\Temp\surefire12347352850190223789\surefirebooter3877791111287089677.jar C:\Users\steph\AppData\Local\Temp\surefire12347352850190223789 2025-11-23T22-58-54_168-jvmRun1 surefire17257501617912873657tmp surefire_03228859747116077989tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\steph\ECS160\ecs160hw2\main-app\target\test-classes;C:\Users\steph\ECS160\ecs160hw2\main-app\target\classes;C:\Users\steph\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\steph\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\steph\.m2\repository\com\squareup\okhttp3\okhttp\4.12.0\okhttp-4.12.0.jar;C:\Users\steph\.m2\repository\com\squareup\okio\okio\3.6.0\okio-3.6.0.jar;C:\Users\steph\.m2\repository\com\squareup\okio\okio-jvm\3.6.0\okio-jvm-3.6.0.jar;C:\Users\steph\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib-common\1.9.10\kotlin-stdlib-common-1.9.10.jar;C:\Users\steph\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib-jdk8\1.8.21\kotlin-stdlib-jdk8-1.8.21.jar;C:\Users\steph\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib\1.8.21\kotlin-stdlib-1.8.21.jar;C:\Users\steph\.m2\repository\org\jetbrains\annotations\13.0\annotations-13.0.jar;C:\Users\steph\.m2\repository\org\jetbrains\kotlin\kotlin-stdlib-jdk7\1.8.21\kotlin-stdlib-jdk7-1.8.21.jar;C:\Users\steph\.m2\repository\com\google\code\gson\gson\2.11.0\gson-2.11.0.jar;C:\Users\steph\.m2\repository\com\google\errorprone\error_prone_annotations\2.27.0\error_prone_annotations-2.27.0.jar;C:\Users\steph\.m2\repository\redis\clients\jedis\5.1.0\jedis-5.1.0.jar;C:\Users\steph\.m2\repository\org\slf4j\slf4j-api\1.7.36\slf4j-api-1.7.36.jar;C:\Users\steph\.m2\repository\org\apache\commons\commons-pool2\2.12.0\commons-pool2-2.12.0.jar;C:\Users\steph\.m2\repository\org\json\json\20231013\json-20231013.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -27,39 +26,11 @@
     <property name="java.home" value="C:\Program Files\Eclipse Adoptium\jdk-17.0.17.10-hotspot"/>
     <property name="file.separator" value="\"/>
     <property name="basedir" value="C:\Users\steph\ECS160\ecs160hw2\main-app"/>
-=======
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.ecs160.hw.SelectedRepoConfigLoaderTest" time="0" tests="3" errors="0" skipped="0" failures="0">
-  <properties>
-    <property name="java.specification.version" value="25"/>
-    <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.class.path" value="/Users/tuan/Desktop/UCD_Classes/ECS160/F25_HW2/main-app/target/test-classes:/Users/tuan/Desktop/UCD_Classes/ECS160/F25_HW2/main-app/target/classes:/Users/tuan/.m2/repository/junit/junit/4.11/junit-4.11.jar:/Users/tuan/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/tuan/.m2/repository/com/squareup/okhttp3/okhttp/4.12.0/okhttp-4.12.0.jar:/Users/tuan/.m2/repository/com/squareup/okio/okio/3.6.0/okio-3.6.0.jar:/Users/tuan/.m2/repository/com/squareup/okio/okio-jvm/3.6.0/okio-jvm-3.6.0.jar:/Users/tuan/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib-common/1.9.10/kotlin-stdlib-common-1.9.10.jar:/Users/tuan/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib-jdk8/1.8.21/kotlin-stdlib-jdk8-1.8.21.jar:/Users/tuan/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib/1.8.21/kotlin-stdlib-1.8.21.jar:/Users/tuan/.m2/repository/org/jetbrains/annotations/13.0/annotations-13.0.jar:/Users/tuan/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib-jdk7/1.8.21/kotlin-stdlib-jdk7-1.8.21.jar:/Users/tuan/.m2/repository/com/google/code/gson/gson/2.11.0/gson-2.11.0.jar:/Users/tuan/.m2/repository/com/google/errorprone/error_prone_annotations/2.27.0/error_prone_annotations-2.27.0.jar:/Users/tuan/.m2/repository/redis/clients/jedis/5.1.0/jedis-5.1.0.jar:/Users/tuan/.m2/repository/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:/Users/tuan/.m2/repository/org/apache/commons/commons-pool2/2.12.0/commons-pool2-2.12.0.jar:/Users/tuan/.m2/repository/org/json/json/20231013/json-20231013.jar:"/>
-    <property name="java.vm.vendor" value="Homebrew"/>
-    <property name="sun.arch.data.model" value="64"/>
-    <property name="java.vendor.url" value="https://github.com/Homebrew/homebrew-core/issues"/>
-    <property name="os.name" value="Mac OS X"/>
-    <property name="java.vm.specification.version" value="25"/>
-    <property name="sun.java.launcher" value="SUN_STANDARD"/>
-    <property name="user.country" value="US"/>
-    <property name="sun.boot.library.path" value="/opt/homebrew/Cellar/openjdk/25.0.1/libexec/openjdk.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="/Users/tuan/Desktop/UCD_Classes/ECS160/F25_HW2/main-app/target/surefire/surefirebooter13118446871799268669.jar /Users/tuan/Desktop/UCD_Classes/ECS160/F25_HW2/main-app/target/surefire 2025-11-23T21-52-44_996-jvmRun1 surefire16739178874386361566tmp surefire_04280688790540125513tmp"/>
-    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
-    <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="/Users/tuan/Desktop/UCD_Classes/ECS160/F25_HW2/main-app/target/test-classes:/Users/tuan/Desktop/UCD_Classes/ECS160/F25_HW2/main-app/target/classes:/Users/tuan/.m2/repository/junit/junit/4.11/junit-4.11.jar:/Users/tuan/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/tuan/.m2/repository/com/squareup/okhttp3/okhttp/4.12.0/okhttp-4.12.0.jar:/Users/tuan/.m2/repository/com/squareup/okio/okio/3.6.0/okio-3.6.0.jar:/Users/tuan/.m2/repository/com/squareup/okio/okio-jvm/3.6.0/okio-jvm-3.6.0.jar:/Users/tuan/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib-common/1.9.10/kotlin-stdlib-common-1.9.10.jar:/Users/tuan/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib-jdk8/1.8.21/kotlin-stdlib-jdk8-1.8.21.jar:/Users/tuan/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib/1.8.21/kotlin-stdlib-1.8.21.jar:/Users/tuan/.m2/repository/org/jetbrains/annotations/13.0/annotations-13.0.jar:/Users/tuan/.m2/repository/org/jetbrains/kotlin/kotlin-stdlib-jdk7/1.8.21/kotlin-stdlib-jdk7-1.8.21.jar:/Users/tuan/.m2/repository/com/google/code/gson/gson/2.11.0/gson-2.11.0.jar:/Users/tuan/.m2/repository/com/google/errorprone/error_prone_annotations/2.27.0/error_prone_annotations-2.27.0.jar:/Users/tuan/.m2/repository/redis/clients/jedis/5.1.0/jedis-5.1.0.jar:/Users/tuan/.m2/repository/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:/Users/tuan/.m2/repository/org/apache/commons/commons-pool2/2.12.0/commons-pool2-2.12.0.jar:/Users/tuan/.m2/repository/org/json/json/20231013/json-20231013.jar:"/>
-    <property name="sun.cpu.endian" value="little"/>
-    <property name="user.home" value="/Users/tuan"/>
-    <property name="user.language" value="en"/>
-    <property name="java.specification.vendor" value="Oracle Corporation"/>
-    <property name="java.version.date" value="2025-10-21"/>
-    <property name="java.home" value="/opt/homebrew/Cellar/openjdk/25.0.1/libexec/openjdk.jdk/Contents/Home"/>
-    <property name="file.separator" value="/"/>
-    <property name="basedir" value="/Users/tuan/Desktop/UCD_Classes/ECS160/F25_HW2/main-app"/>
->>>>>>> 6e1559e3999b555e323e438c1df6b9ec81b7de86
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-<<<<<<< HEAD
-    <property name="surefire.real.class.path" value="C:\Users\steph\AppData\Local\Temp\surefire7220878030979925777\surefirebooter11011404481906361480.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\steph\AppData\Local\Temp\surefire12347352850190223789\surefirebooter3877791111287089677.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.17+10"/>
@@ -88,41 +59,6 @@
     <property name="java.class.version" value="61.0"/>
   </properties>
   <testcase name="Load_Missing_File_Test" classname="com.ecs160.hw.SelectedRepoConfigLoaderTest" time="0"/>
-  <testcase name="Load_Valid_Config_Test" classname="com.ecs160.hw.SelectedRepoConfigLoaderTest" time="0.002"/>
-=======
-    <property name="apple.awt.application.name" value="ForkedBooter"/>
-    <property name="surefire.real.class.path" value="/Users/tuan/Desktop/UCD_Classes/ECS160/F25_HW2/main-app/target/surefire/surefirebooter13118446871799268669.jar"/>
-    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
-    <property name="java.runtime.version" value="25.0.1"/>
-    <property name="user.name" value="tuan"/>
-    <property name="stdout.encoding" value="UTF-8"/>
-    <property name="path.separator" value=":"/>
-    <property name="os.version" value="14.6.1"/>
-    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
-    <property name="file.encoding" value="UTF-8"/>
-    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
-    <property name="java.vendor.version" value="Homebrew"/>
-    <property name="localRepository" value="/Users/tuan/.m2/repository"/>
-    <property name="java.vendor.url.bug" value="https://github.com/Homebrew/homebrew-core/issues"/>
-    <property name="java.io.tmpdir" value="/var/folders/7v/5qn44bfd409857d592cj5nq00000gn/T/"/>
-    <property name="java.version" value="25.0.1"/>
-    <property name="user.dir" value="/Users/tuan/Desktop/UCD_Classes/ECS160/F25_HW2/main-app"/>
-    <property name="os.arch" value="aarch64"/>
-    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="native.encoding" value="UTF-8"/>
-    <property name="java.library.path" value="/Users/tuan/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
-    <property name="java.vm.info" value="mixed mode, sharing"/>
-    <property name="stderr.encoding" value="UTF-8"/>
-    <property name="java.vendor" value="Homebrew"/>
-    <property name="java.vm.version" value="25.0.1"/>
-    <property name="stdin.encoding" value="UTF-8"/>
-    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
-    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
-    <property name="java.class.version" value="69.0"/>
-  </properties>
-  <testcase name="Load_Missing_File_Test" classname="com.ecs160.hw.SelectedRepoConfigLoaderTest" time="0"/>
-  <testcase name="Load_Valid_Config_Test" classname="com.ecs160.hw.SelectedRepoConfigLoaderTest" time="0"/>
->>>>>>> 6e1559e3999b555e323e438c1df6b9ec81b7de86
-  <testcase name="Load_Empty_File_Test" classname="com.ecs160.hw.SelectedRepoConfigLoaderTest" time="0"/>
+  <testcase name="Load_Valid_Config_Test" classname="com.ecs160.hw.SelectedRepoConfigLoaderTest" time="0.003"/>
+  <testcase name="Load_Empty_File_Test" classname="com.ecs160.hw.SelectedRepoConfigLoaderTest" time="0.004"/>
 </testsuite>
