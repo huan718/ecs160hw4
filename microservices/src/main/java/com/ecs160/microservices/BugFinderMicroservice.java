@@ -29,7 +29,7 @@ public class BugFinderMicroservice {
                     "{\"title\", \"body\"}:\n" +
                     "  - \"title\": one short phrase naming the bug (e.g., \"Null pointer dereference\").\n" +
                     "  - \"body\": 1–3 sentences the bug with specific functions/lines.\n\n" + 
-                    "Return an empty JSON array:[] if there are no bugs."
+                    "Return an empty JSON array:[] if there are no bugs." +
                     "Additionally, do not include explanation, commentary, or markdown outside the JSON, code fences, or a top-level object that isn't a JSON array." +
                     "Here is the C source code:\n\n" +
                     cSource;
