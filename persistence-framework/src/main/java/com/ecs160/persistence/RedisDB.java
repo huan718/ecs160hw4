@@ -12,13 +12,11 @@ import javassist.util.proxy.MethodHandler;
 import javassist.util.proxy.ProxyFactory;
 import redis.clients.jedis.Jedis;
 
-@PersistableObject
 public class RedisDB {
-
-    private final Jedis jedisSession;
+    private Jedis jedis;
 
     public RedisDB() {
-        jedisSession = new Jedis("localhost", 6379);
+        this.jedis = new Jedis("localhost", 6379);
     }
 
     public boolean persist(Object obj) {
@@ -26,13 +24,14 @@ public class RedisDB {
         String className = clazz.getSimpleName();
 
         try {
-            // 1. Find and Validate ID
-            Field idField = getIdField(clazz);
+            // Finds field with Id as Redis key
+            Field idField = Util.getIdField(clazz);
             if (idField == null) {
                 System.err.println("No @Id field found.");
                 return false;
             }
 
+            // Null handling
             Object idVal = idField.get(obj);
             if (idVal == null) {
                 System.err.println("@Id cannot be null.");
@@ -41,31 +40,17 @@ public class RedisDB {
 
             String redisKey = className + ":" + idVal.toString();
 
-            // 2. Iterate Fields
             for (Field field : clazz.getDeclaredFields()) {
                 field.setAccessible(true);
                 if (field.isAnnotationPresent(PersistableField.class)) {
                     Object value = field.get(obj);
                     if (value != null) {
+                        // If list recursively persist element
                         if (value instanceof List) {
-                            // --- Handle List (Children) ---
-                            List<?> list = (List<?>) value;
-                            String listKey = redisKey + ":" + field.getName();
-                            jedisSession.del(listKey); // Clear old list
-
-                            for (Object child : list) {
-                                // Recursive persist
-                                persist(child); 
-                                
-                                // Save Child ID reference
-                                Field childIdField = getIdField(child.getClass());
-                                Object childId = childIdField.get(child);
-                                String childRef = child.getClass().getName() + ":" + childId;
-                                jedisSession.rpush(listKey, childRef);
-                            }
+                            ListLoader.persistList(redisKey, field, value, jedis, this);
                         } else {
-                            // --- Handle Simple Field ---
-                            jedisSession.hset(redisKey, field.getName(), value.toString());
+                            // Otherwise store as hash in Redis
+                            jedis.hset(redisKey, field.getName(), value.toString());
                         }
                     }
                 }
@@ -76,85 +61,53 @@ public class RedisDB {
             e.printStackTrace();
             return false;
         }
-    }
+    }    
 
-    public Object load(Object object) {
-        Class<?> clazz = object.getClass();
+    public Object load(Object obj) { 
+        Class<?> clazz = obj.getClass();
 
+        // Check for non-persistable object
         if (!clazz.isAnnotationPresent(PersistableObject.class)) {
             throw new RuntimeException("Class is not persistable");
         }
 
         try {
-            // 1. Get ID from stub object
-            Field idField = getIdField(clazz);
-            if (idField == null) return null;
+            // Get Id field and null handling
+            Field idField = Util.getIdField(clazz);
+            if (idField == null) {
+                System.err.println("No @Id field found.");    
+                return null;
+            }
 
-            Object idVal = idField.get(object);
-            if (idVal == null) return null;
+            Object idVal = idField.get(obj);
+            if (idVal == null) {
+                System.err.println("@Id cannot be null.");
+                return null;
+            }
 
-            // 2. Create Javassist Proxy
-            ProxyFactory factory = new ProxyFactory();
-            factory.setSuperclass(clazz);
-            
-            // Define the Handler (Interceptor)
-            MethodHandler handler = new MethodHandler() {
-                @Override
-                public Object invoke(Object self, Method thisMethod, Method proceed, Object[] args) throws Throwable {
-                    // Check for @LazyLoad on the method being called
-                    if (thisMethod.isAnnotationPresent(LazyLoad.class)) {
-                        LazyLoad lazyAnn = thisMethod.getAnnotation(LazyLoad.class);
-                        String targetFieldName = lazyAnn.field();
+            Object proxyObj = LazyLoaderProxyFactory.createProxy(clazz, idVal, this, jedis);
 
-                        Field field = clazz.getDeclaredField(targetFieldName);
-                        field.setAccessible(true);
-                        Object currentValue = field.get(self);
-
-                        // If null, it means we haven't loaded it yet. Load now!
-                        if (currentValue == null) {
-                           // System.out.println("Lazy Loading triggered for: " + targetFieldName);
-                            if (field.getType() == List.class) {
-                                loadListField(self, field, clazz.getSimpleName() + ":" + idVal);
-                            }
-                            // Return the newly loaded value
-                            return field.get(self);
-                        }
-                    }
-                    // Delegate to the original method
-                    return proceed.invoke(self, args);
-                }
-            };
-
-            // Instantiate the proxy
-            Object proxyObj = factory.create(new Class<?>[0], new Object[0], handler);
-
-            // 3. Populate ID on Proxy
-            idField.set(proxyObj, idVal);
-
-            // 4. Populate Simple Fields (Eagerly) on Proxy
-            // We do NOT populate Lazy fields here.
+            // Build Redis key 
             String redisKey = clazz.getSimpleName() + ":" + idVal.toString();
-            Map<String, String> redisData = jedisSession.hgetAll(redisKey);
+            Map<String, String> redisData = jedis.hgetAll(redisKey);
 
-            if (redisData.isEmpty()) return null; // Object not found
+            if (redisData.isEmpty()) return null; 
 
+            // Iterate through fields and load non-lazy
             for (Field field : clazz.getDeclaredFields()) {
                 field.setAccessible(true);
-                if (field.isAnnotationPresent(PersistableField.class)) {
-                    // Skip if this field corresponds to a LazyLoad method
-                    if (isFieldLazy(clazz, field.getName())) {
-                        continue; 
-                    }
 
-                    if (field.getType() == List.class) {
-                        // Eager load list if NOT lazy
-                        loadListField(proxyObj, field, redisKey);
-                    } else {
-                        // Simple field
-                        String val = redisData.get(field.getName());
-                        if (val != null) {
-                            field.set(proxyObj, convertToFieldType(field.getType(), val));
-                        }
+                // Skip non-persistent fields
+                if (!field.isAnnotationPresent(PersistableField.class)) continue;
+                // Skip lazy-loaded fields
+                if (field.isAnnotationPresent(LazyLoad.class)) continue;
+                // List handling
+                if (List.class.isAssignableFrom(field.getType())) {
+                    ListLoader.loadListField(proxyObj, field, jedis, this, redisKey);
+                } else {
+                    String val = redisData.get(field.getName());
+                    if (val != null) {
+                        field.set(proxyObj, Util.convertToFieldType(field.getType(), val));
                     }
                 }
             }
@@ -164,66 +117,6 @@ public class RedisDB {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
-        }
-    }
-
-    // --- Helpers ---
-
-    private void loadListField(Object target, Field field, String parentKey) throws Exception {
-        String listKey = parentKey + ":" + field.getName();
-        List<String> references = jedisSession.lrange(listKey, 0, -1);
-        
-        List<Object> children = new ArrayList<>();
-        
-        // Determine generic type (e.g. List<Player>)
-        ParameterizedType listType = (ParameterizedType) field.getGenericType();
-        Class<?> childClass = (Class<?>) listType.getActualTypeArguments()[0];
-
-        for (String ref : references) {
-            // ref format: "com.package.Player:10"
-            String[] parts = ref.split(":");
-            if (parts.length < 2) continue;
-            String childId = parts[parts.length - 1];
-
-            // Recursively load child
-            Object childStub = childClass.newInstance();
-            Field childIdField = getIdField(childClass);
-            childIdField.set(childStub, convertToFieldType(childIdField.getType(), childId));
-            
-            children.add(load(childStub));
-        }
-        
-        field.set(target, children);
-    }
-
-    private boolean isFieldLazy(Class<?> clazz, String fieldName) {
-        for (Method m : clazz.getDeclaredMethods()) {
-            if (m.isAnnotationPresent(LazyLoad.class)) {
-                if (m.getAnnotation(LazyLoad.class).field().equals(fieldName)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    private Field getIdField(Class<?> clazz) {
-        for (Field f : clazz.getDeclaredFields()) {
-            f.setAccessible(true);
-            if (f.isAnnotationPresent(Id.class)) {
-                return f;
-            }
-        }
-        return null;
-    }
-
-    private Object convertToFieldType(Class<?> type, String value) {
-        if (type == String.class) return value;
-        if (type == int.class || type == Integer.class) return Integer.parseInt(value);
-        if (type == long.class || type == Long.class) return Long.parseLong(value);
-        if (type == double.class || type == Double.class) return Double.parseDouble(value);
-        if (type == float.class || type == Float.class) return Float.parseFloat(value);
-        if (type == boolean.class || type == Boolean.class) return Boolean.parseBoolean(value);
-        return value;
+        } 
     }
 }

@@ -2,7 +2,6 @@ package com.ecs160;
 import com.ecs160.clients.OllamaClient;
 
 import okhttp3.*;
-// Use static import for clean assertions
 import static org.junit.Assert.*;
 import org.junit.Test;
 
