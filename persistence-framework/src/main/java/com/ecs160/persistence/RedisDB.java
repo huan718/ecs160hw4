@@ -172,7 +172,6 @@ public class RedisDB {
 
     // Helper function to load a list in Redis
     private void loadListField(Object target, Field field, String parentKey) throws Exception {
-        // Build key
         String listKey = parentKey + ":" + field.getName();
         List<String> references = jedisSession.lrange(listKey, 0, -1);
         
