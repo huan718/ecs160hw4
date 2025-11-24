@@ -17,15 +17,18 @@ public class SummarizerTest {
         AIClient mockClient = new AIClient() {
             @Override
             public String ask(String prompt) throws IOException {
-                if (prompt.startsWith("Summarize this GitHub issue")) {
+                // FIX: Check for the actual string used in the Microservice
+                // Using .contains() is safer than .startsWith()
+                if (prompt.contains("Given the Github issues summarize it")) {
                     return mockSummary;
                 }
-                throw new IOException("Unexpected prompt");
+                // This is what was causing the test to fail before
+                throw new IOException("Unexpected prompt: " + prompt);
             }
         };
 
         IssueSummarizerMicroservice service = new IssueSummarizerMicroservice(mockClient);
-        
+
         String inputJson = "{ \"title\": \"Bug in UI\", \"body\": \"Buttons are broken\" }";
         String result = service.summarizeIssue(inputJson);
 

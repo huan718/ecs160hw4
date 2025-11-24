@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 C:\Users\steph\ECS160\ecs160hw2\main-app\src\test\java\com\ecs160\hw\AppTest.java
 C:\Users\steph\ECS160\ecs160hw2\main-app\src\test\java\com\ecs160\hw\GitRepoClonerTest.java
 C:\Users\steph\ECS160\ecs160hw2\main-app\src\test\java\com\ecs160\hw\RedisLoaderTest.java
 C:\Users\steph\ECS160\ecs160hw2\main-app\src\test\java\com\ecs160\hw\SelectedRepoConfigLoaderTest.java
 C:\Users\steph\ECS160\ecs160hw2\main-app\src\test\java\com\ecs160\hw\MicroserviceClientTest.java
 C:\Users\steph\ECS160\ecs160hw2\main-app\src\test\java\com\ecs160\hw\SelectedRepoConfigTest.java
+=======
+/Users/tuan/Desktop/UCD_Classes/ECS160/F25_HW2/main-app/src/test/java/com/ecs160/hw/SelectedRepoConfigLoaderTest.java
+/Users/tuan/Desktop/UCD_Classes/ECS160/F25_HW2/main-app/src/test/java/com/ecs160/hw/AppTest.java
+/Users/tuan/Desktop/UCD_Classes/ECS160/F25_HW2/main-app/src/test/java/com/ecs160/hw/SelectedRepoConfigTest.java
+/Users/tuan/Desktop/UCD_Classes/ECS160/F25_HW2/main-app/src/test/java/com/ecs160/hw/RedisLoaderTest.java
+/Users/tuan/Desktop/UCD_Classes/ECS160/F25_HW2/main-app/src/test/java/com/ecs160/hw/MicroserviceClientTest.java
+/Users/tuan/Desktop/UCD_Classes/ECS160/F25_HW2/main-app/src/test/java/com/ecs160/hw/GitRepoClonerTest.java
+>>>>>>> 6e1559e3999b555e323e438c1df6b9ec81b7de86

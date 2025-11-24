@@ -1,4 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.ecs160.hw.SelectedRepoConfigLoaderTest
 -------------------------------------------------------------------------------
+<<<<<<< HEAD
 Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 s - in com.ecs160.hw.SelectedRepoConfigLoaderTest
+=======
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in com.ecs160.hw.SelectedRepoConfigLoaderTest
+>>>>>>> 6e1559e3999b555e323e438c1df6b9ec81b7de86

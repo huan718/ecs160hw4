@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 com\ecs160\hw\GitRepoClonerTest.class
 com\ecs160\hw\MicroserviceClientTest.class
 com\ecs160\hw\RedisLoaderTest.class
@@ -10,3 +11,17 @@ com\ecs160\hw\MicroserviceClientTest$1.class
 com\ecs160\hw\MicroserviceClientTest$4.class
 com\ecs160\hw\MicroserviceClientTest$2.class
 com\ecs160\hw\SelectedRepoConfigTest.class
+=======
+com/ecs160/hw/RedisLoaderTest.class
+com/ecs160/hw/AppTest.class
+com/ecs160/hw/MicroserviceClientTest$4.class
+com/ecs160/hw/GitRepoClonerTest.class
+com/ecs160/hw/SelectedRepoConfigLoaderTest.class
+com/ecs160/hw/MicroserviceClientTest$2.class
+com/ecs160/hw/SelectedRepoConfigLoaderTest$1.class
+com/ecs160/hw/RedisLoaderTest$1.class
+com/ecs160/hw/MicroserviceClientTest.class
+com/ecs160/hw/MicroserviceClientTest$1.class
+com/ecs160/hw/SelectedRepoConfigTest.class
+com/ecs160/hw/MicroserviceClientTest$3.class
+>>>>>>> 6e1559e3999b555e323e438c1df6b9ec81b7de86

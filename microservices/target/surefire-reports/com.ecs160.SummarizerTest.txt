@@ -1,8 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.ecs160.SummarizerTest
--------------------------------------------------------------------------------
-Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.038 s <<< FAILURE! - in com.ecs160.SummarizerTest
-SummarizeIssue_Success_Test(com.ecs160.SummarizerTest)  Time elapsed: 0.034 s  <<< FAILURE!
-org.junit.ComparisonFailure: expected:<{[ "summary": "This is a short summary" ]}> but was:<{["error":"Unexpected prompt"]}>
-	at com.ecs160.SummarizerTest.SummarizeIssue_Success_Test(SummarizerTest.java:33)
-

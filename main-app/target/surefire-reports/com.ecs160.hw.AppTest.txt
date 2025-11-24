@@ -1,4 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.ecs160.hw.AppTest
 -------------------------------------------------------------------------------
+<<<<<<< HEAD
 Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.043 s - in com.ecs160.hw.AppTest
+=======
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in com.ecs160.hw.AppTest
+>>>>>>> 6e1559e3999b555e323e438c1df6b9ec81b7de86
