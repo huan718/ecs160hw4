@@ -43,7 +43,17 @@ ollama serve
 ### 2. Redis Setup
 
 
-We assumeed redis is already setup on testing environment
+We included a prepopulated Redis database snapshot with the name 
+```
+dump.rdb
+```
+Replace local DB with prepopulated one by doing
+```
+sudo service redis-server stop
+sudo cp dump.rdb /var/lib/redis/dump.rdb
+sudo cp dump.rdb /var/lib/redis/dump.rdb
+sudo service redis-server start
+```
 
 ---
 
