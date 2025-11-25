@@ -63,6 +63,7 @@ bash script.sh
 ```
 
 > Full execution may take **~15 minutes**
+> Gave the LLM to take **~2 minutes** to create a response, can increase if needed
 
 ### 4. Viewing Results
 
