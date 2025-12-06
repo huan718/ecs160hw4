@@ -1,9 +1,9 @@
 package com.ecs160;
-import com.ecs160.clients.OllamaClient;
 
+import com.ecs160.clients.OllamaClient;
 import okhttp3.*;
-import static org.junit.Assert.*;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 import java.io.IOException;
 
@@ -28,7 +28,7 @@ public class OllamaTest {
     }
 
     @Test(expected = IOException.class)
-    public void Ask_Networkfailur_Test() throws IOException {
+    public void Ask_Networkfailure_Test() throws IOException {
         OkHttpClient mockHttpClient = new OkHttpClient() {
             @Override
             public Call newCall(Request request) {
@@ -46,7 +46,7 @@ public class OllamaTest {
         client.ask("Crash me");
     }
 
-    //mock call
+    // Mock call implementation
     private static class MockCall implements Call {
         private final Request request;
         private final String responseBody;
@@ -63,11 +63,10 @@ public class OllamaTest {
                     .protocol(Protocol.HTTP_1_1)
                     .code(200)
                     .message("OK")
-                    .body(ResponseBody.create(MediaType.get("application/json"), responseBody))
+                    .body(ResponseBody.create(responseBody, MediaType.get("application/json")))
                     .build();
         }
 
-        //unused methods
         @Override public Request request() { return request; }
         @Override public void enqueue(Callback r) { }
         @Override public void cancel() { }

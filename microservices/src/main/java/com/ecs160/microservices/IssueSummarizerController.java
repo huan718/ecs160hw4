@@ -1,33 +1,31 @@
 package com.ecs160.microservices;
 
-// import the Microservice annotation we created
-import com.ecs160.annotations.Microservice;
-import com.ecs160.annotations.Endpoint;
-import com.ecs160.clients.*;
+import com.ecs160.clients.AIClient;
 import com.google.gson.Gson;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Microservice
-public class IssueSummarizerMicroservice {
+@RestController
+public class IssueSummarizerController {
     private final AIClient client; 
 
-    public IssueSummarizerMicroservice(AIClient client) {
+    public IssueSummarizerController(AIClient client) {
         this.client = client;
     }
 
-    @Endpoint(url = "/summarize_issue")
-    public String summarizeIssue(String issueJson) {            
+    @PostMapping("/summarize_issue")
+    public String summarizeIssue(@RequestBody String issueJson) {            
         try {
             String prompt = 
                 "Given the Github issues summarize it and respond ONLY with a valid JSON object using keys {\"title\", \"body\"}. " +
                 "DO NOT include explanations, thoughts, or preamble and ONLY output pure JSON:\n" + issueJson;  
 
-            // Null and edge case handling
             String raw = client.ask(prompt);
 
             if (raw == null || raw.isBlank())
                 return "{\"error\":\"LLM returned null\"}";
 
-            // Extract first JSON object
             int start = raw.indexOf("{");
             int end = raw.lastIndexOf("}");
 
@@ -36,7 +34,6 @@ public class IssueSummarizerMicroservice {
 
             String json = raw.substring(start, end + 1);
 
-            // Validate JSON
             try {
                 new Gson().fromJson(json, Object.class);
             } catch (Exception e) {
@@ -49,6 +46,4 @@ public class IssueSummarizerMicroservice {
             return "{\"error\":\"" + e.getMessage() + "\"}";
         }
     }
-
 }
-

@@ -1,9 +1,9 @@
 package com.ecs160;
-import com.ecs160.microservices.BugFinderMicroservice;
 
 import com.ecs160.clients.AIClient;
-import static org.junit.Assert.*;
+import com.ecs160.microservices.BugFinderController;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 import java.io.IOException;
 
@@ -15,26 +15,26 @@ public class BugServiceTest {
         
         String cCode = "int main() { return 0; }";
 
-        // Mock client and service
+        // Mock client
         AIClient mockClient = new AIClient() {
             @Override
             public String ask(String prompt) throws IOException {
-                if (prompt.contains(cCode) || prompt.contains("static analysis assistant")) {
+                if (prompt.contains(cCode) || prompt.contains("identify potential bugs")) {
                     return expectedResponse;
                 }
                 return null;
             }
         };
 
-        BugFinderMicroservice service = new BugFinderMicroservice(mockClient);
+        BugFinderController controller = new BugFinderController(mockClient);
 
-        String result = service.findBugs(cCode);
-        // Mocks accurate repsonse
+        String result = controller.findBugs(cCode);
+        // Mocks accurate response
         assertEquals(expectedResponse, result);
     }
 
     @Test
-    public void Null_Reponse_Test() {
+    public void Null_Response_Test() {
         // Mock null client
         AIClient nullClient = new AIClient() {
             @Override
@@ -43,8 +43,8 @@ public class BugServiceTest {
             }
         };
 
-        BugFinderMicroservice service = new BugFinderMicroservice(nullClient);
-        String result = service.findBugs("some code");
+        BugFinderController controller = new BugFinderController(nullClient);
+        String result = controller.findBugs("some code");
 
         assertTrue(result.contains("\"error\""));
     }

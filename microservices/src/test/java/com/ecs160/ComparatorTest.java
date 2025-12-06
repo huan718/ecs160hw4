@@ -1,17 +1,17 @@
 package com.ecs160;
-import com.ecs160.microservices.IssueComparatorMicroservice;
 
 import com.ecs160.clients.AIClient;
+import com.ecs160.microservices.IssueComparatorController;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 public class ComparatorTest {
 
-    private IssueComparatorMicroservice service;
+    private IssueComparatorController controller;
 
     // Mock service setup
     @Before
@@ -22,7 +22,7 @@ public class ComparatorTest {
                 return "";
             }
         };
-        service = new IssueComparatorMicroservice(dummyClient);
+        controller = new IssueComparatorController(dummyClient);
     }
 
     @Test
@@ -40,7 +40,7 @@ public class ComparatorTest {
         input.add("issueList1", list1);
         input.add("issueList2", list2);
 
-        String resultJson = service.checkEquivalence(input.toString());
+        String resultJson = controller.checkEquivalence(input.toString());
 
         JsonObject resultObj = JsonParser.parseString(resultJson).getAsJsonObject();
         JsonArray common = resultObj.getAsJsonArray("commonIssues");
@@ -63,7 +63,7 @@ public class ComparatorTest {
         input.add("issueList1", list1);
         input.add("issueList2", list2);
 
-        String resultJson = service.checkEquivalence(input.toString());
+        String resultJson = controller.checkEquivalence(input.toString());
 
         JsonObject resultObj = JsonParser.parseString(resultJson).getAsJsonObject();
         JsonArray common = resultObj.getAsJsonArray("commonIssues");

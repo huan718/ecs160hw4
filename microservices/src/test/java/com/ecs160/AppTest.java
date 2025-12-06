@@ -1,14 +1,16 @@
 package com.ecs160;
 
-import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
-public class AppTest 
-{
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class AppTest {
+
     @Test
-    public void shouldAnswerWithTrue()
-    {
-        assertTrue( true );
+    public void contextLoads() {
+        // This test ensures the Spring Boot application starts up correctly
     }
 }
