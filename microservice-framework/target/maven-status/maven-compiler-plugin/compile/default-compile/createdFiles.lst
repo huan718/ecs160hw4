@@ -1,0 +1,7 @@
+com\ecs160\MicroserviceRegistry.class
+com\ecs160\SimpleHttpServer.class
+com\ecs160\annotations\Endpoint.class
+com\ecs160\Endpointdef.class
+com\ecs160\Launcher.class
+com\ecs160\RequestDispatcher.class
+com\ecs160\annotations\Microservice.class

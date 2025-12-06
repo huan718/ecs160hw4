@@ -53,7 +53,7 @@ public class App {
             Path repoDir = cloner.ensureRepoCloned(repoName, repoUrl);
 
             // 4. Microservice HTTP client (A, B, C)
-            MicroserviceClient micro = new MicroserviceClient("http://localhost:8080");
+            MicroserviceClient micro = new MicroserviceClient("http://localhost:30000");
 
             // === IssueList1 via Microservice A (summarize_issue) ===
             List<String> issueKeys = redis.getIssueKeysForRepo(repoName);
