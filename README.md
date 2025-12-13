@@ -56,7 +56,7 @@ starts a local server with the file
 
 ### 3. Running the Program
 
-
+From the project root directory:
 ```
 # Run the script
 bash script.sh

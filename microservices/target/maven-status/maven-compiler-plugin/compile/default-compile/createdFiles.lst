@@ -1,0 +1,6 @@
+com/ecs160/clients/AIClient.class
+com/ecs160/microservices/BugFinderController.class
+com/ecs160/MicroserviceApplication.class
+com/ecs160/microservices/IssueSummarizerController.class
+com/ecs160/microservices/IssueComparatorController.class
+com/ecs160/clients/OllamaClient.class
