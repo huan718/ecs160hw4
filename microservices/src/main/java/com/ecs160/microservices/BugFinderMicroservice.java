@@ -1,19 +1,20 @@
 package com.ecs160.microservices;
 
-import com.ecs160.clients.AIClient;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ecs160.clients.AIClient;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+
 // Mark as Rest API controller
 @RestController
-public class BugFinderController {
+public class BugFinderMicroservice {
     private final AIClient client;
     private final Gson gson = new Gson();
 
-    public BugFinderController(AIClient client) {
+    public BugFinderMicroservice(AIClient client) {
         this.client = client;
     }
 

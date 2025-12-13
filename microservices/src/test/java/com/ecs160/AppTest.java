@@ -11,6 +11,6 @@ public class AppTest {
 
     @Test
     public void contextLoads() {
-        // This test ensures the Spring Boot application starts up correctly
+        // This test Springboot starts up correctly
     }
 }

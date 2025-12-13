@@ -10,10 +10,10 @@ import java.util.Set;
 
 // Mark as Rest API controller
 @RestController
-public class IssueComparatorController {
+public class IssueComparatorMicroservice {
     private final AIClient client; 
 
-    public IssueComparatorController(AIClient client) {
+    public IssueComparatorMicroservice(AIClient client) {
         this.client = client;
     }
 

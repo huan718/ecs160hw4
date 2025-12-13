@@ -1,7 +1,7 @@
 package com.ecs160;
 
 import com.ecs160.clients.AIClient;
-import com.ecs160.microservices.BugFinderController;
+import com.ecs160.microservices.BugFinderMicroservice;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -26,7 +26,7 @@ public class BugServiceTest {
             }
         };
 
-        BugFinderController controller = new BugFinderController(mockClient);
+        BugFinderMicroservice controller = new BugFinderMicroservice(mockClient);
 
         String result = controller.findBugs(cCode);
         // Mocks accurate response
@@ -43,7 +43,7 @@ public class BugServiceTest {
             }
         };
 
-        BugFinderController controller = new BugFinderController(nullClient);
+        BugFinderMicroservice controller = new BugFinderMicroservice(nullClient);
         String result = controller.findBugs("some code");
 
         assertTrue(result.contains("\"error\""));

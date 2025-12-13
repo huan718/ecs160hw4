@@ -1,17 +1,18 @@
 package com.ecs160.microservices;
 
-import com.ecs160.clients.AIClient;
-import com.google.gson.Gson;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ecs160.clients.AIClient;
+import com.google.gson.Gson;
+
 // Mark as Rest API controller
 @RestController
-public class IssueSummarizerController {
+public class IssueSummarizerMicroservice {
     private final AIClient client; 
 
-    public IssueSummarizerController(AIClient client) {
+    public IssueSummarizerMicroservice(AIClient client) {
         this.client = client;
     }
 
