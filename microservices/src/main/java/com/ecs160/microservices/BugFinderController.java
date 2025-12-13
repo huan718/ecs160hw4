@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+// Mark as Rest API controller
 @RestController
 public class BugFinderController {
     private final AIClient client;
@@ -16,6 +17,7 @@ public class BugFinderController {
         this.client = client;
     }
 
+    // HTTP POST request
     @PostMapping("/find_bugs")
     public String findBugs(@RequestBody String cSource) {
         try {

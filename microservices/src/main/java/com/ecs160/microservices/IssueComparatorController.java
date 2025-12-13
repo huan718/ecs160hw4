@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashSet;
 import java.util.Set;
 
+// Mark as Rest API controller
 @RestController
 public class IssueComparatorController {
     private final AIClient client; 
@@ -16,6 +17,7 @@ public class IssueComparatorController {
         this.client = client;
     }
 
+    // Mapping HTTP POST request
     @PostMapping("/check_equivalence")
     public String checkEquivalence(@RequestBody String body) {
         try {

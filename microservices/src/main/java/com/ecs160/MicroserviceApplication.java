@@ -10,6 +10,7 @@ import com.ecs160.clients.OllamaClient;
 @SpringBootApplication
 public class MicroserviceApplication {
 
+    // Launches app with springboot
     public static void main(String[] args) {
         SpringApplication.run(MicroserviceApplication.class, args);
     }

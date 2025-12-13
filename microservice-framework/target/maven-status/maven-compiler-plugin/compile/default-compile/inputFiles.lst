@@ -1,7 +1,7 @@
-C:\Users\steph\ECS160\ecs160hw4\ecs160hw4\microservice-framework\src\main\java\com\ecs160\annotations\Microservice.java
-C:\Users\steph\ECS160\ecs160hw4\ecs160hw4\microservice-framework\src\main\java\com\ecs160\RequestDispatcher.java
-C:\Users\steph\ECS160\ecs160hw4\ecs160hw4\microservice-framework\src\main\java\com\ecs160\MicroserviceRegistry.java
-C:\Users\steph\ECS160\ecs160hw4\ecs160hw4\microservice-framework\src\main\java\com\ecs160\Launcher.java
-C:\Users\steph\ECS160\ecs160hw4\ecs160hw4\microservice-framework\src\main\java\com\ecs160\Endpointdef.java
-C:\Users\steph\ECS160\ecs160hw4\ecs160hw4\microservice-framework\src\main\java\com\ecs160\annotations\Endpoint.java
-C:\Users\steph\ECS160\ecs160hw4\ecs160hw4\microservice-framework\src\main\java\com\ecs160\SimpleHttpServer.java
+/Users/tuan/Desktop/UCD_Classes/ECS160/ecs160hw4/microservice-framework/src/main/java/com/ecs160/RequestDispatcher.java
+/Users/tuan/Desktop/UCD_Classes/ECS160/ecs160hw4/microservice-framework/src/main/java/com/ecs160/MicroserviceRegistry.java
+/Users/tuan/Desktop/UCD_Classes/ECS160/ecs160hw4/microservice-framework/src/main/java/com/ecs160/Endpointdef.java
+/Users/tuan/Desktop/UCD_Classes/ECS160/ecs160hw4/microservice-framework/src/main/java/com/ecs160/SimpleHttpServer.java
+/Users/tuan/Desktop/UCD_Classes/ECS160/ecs160hw4/microservice-framework/src/main/java/com/ecs160/Launcher.java
+/Users/tuan/Desktop/UCD_Classes/ECS160/ecs160hw4/microservice-framework/src/main/java/com/ecs160/annotations/Endpoint.java
+/Users/tuan/Desktop/UCD_Classes/ECS160/ecs160hw4/microservice-framework/src/main/java/com/ecs160/annotations/Microservice.java

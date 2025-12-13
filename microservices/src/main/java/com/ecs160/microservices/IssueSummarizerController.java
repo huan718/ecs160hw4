@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+// Mark as Rest API controller
 @RestController
 public class IssueSummarizerController {
     private final AIClient client; 
@@ -14,6 +15,7 @@ public class IssueSummarizerController {
         this.client = client;
     }
 
+    // Mapping HTTP POST request
     @PostMapping("/summarize_issue")
     public String summarizeIssue(@RequestBody String issueJson) {            
         try {
