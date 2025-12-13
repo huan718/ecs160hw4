@@ -1,7 +1,7 @@
 package com.ecs160;
 
 import com.ecs160.clients.AIClient;
-import com.ecs160.microservices.IssueComparatorController;
+import com.ecs160.microservices.IssueComparatorMicroservice;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 
 public class ComparatorTest {
 
-    private IssueComparatorController controller;
+    private IssueComparatorMicroservice controller;
 
     // Mock service setup
     @Before
@@ -22,7 +22,7 @@ public class ComparatorTest {
                 return "";
             }
         };
-        controller = new IssueComparatorController(dummyClient);
+        controller = new IssueComparatorMicroservice(dummyClient);
     }
 
     @Test

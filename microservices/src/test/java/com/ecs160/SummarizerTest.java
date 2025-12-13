@@ -1,7 +1,7 @@
 package com.ecs160;
 
 import com.ecs160.clients.AIClient;
-import com.ecs160.microservices.IssueSummarizerController;
+import com.ecs160.microservices.IssueSummarizerMicroservice;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -13,7 +13,7 @@ public class SummarizerTest {
     public void SummarizeIssue_Success_Test() {
         String mockSummary = "{ \"summary\": \"This is a short summary\" }";
 
-        // Mock client 
+        //mock client
         AIClient mockClient = new AIClient() {
             @Override
             public String ask(String prompt) throws IOException {
@@ -24,12 +24,12 @@ public class SummarizerTest {
             }
         };
 
-        IssueSummarizerController controller = new IssueSummarizerController(mockClient);
+        IssueSummarizerMicroservice controller = new IssueSummarizerMicroservice(mockClient);
 
         String inputJson = "{ \"title\": \"Bug in UI\", \"body\": \"Buttons are broken\" }";
         String result = controller.summarizeIssue(inputJson);
 
-        // Success case
+        //success case
         assertEquals(mockSummary, result);
     }
 
@@ -42,11 +42,11 @@ public class SummarizerTest {
             }
         };
 
-        IssueSummarizerController controller = new IssueSummarizerController(errorClient);
+        IssueSummarizerMicroservice controller = new IssueSummarizerMicroservice(errorClient);
         
         String result = controller.summarizeIssue("{}");
 
-        // Fail case
+        //fail case
         assertTrue(result.contains("Network failure") || result.contains("error"));
     }
 }
