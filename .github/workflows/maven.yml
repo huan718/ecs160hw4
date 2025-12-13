@@ -20,10 +20,6 @@ jobs:
           distribution: temurin
           java-version: 24
 
-      - name: Build microservice framework
-        working-directory: ./microservice-framework
-        run: mvn -B clean install
-
       - name: Build persistence framework
         working-directory: ./persistence-framework
         run: mvn -B clean install
